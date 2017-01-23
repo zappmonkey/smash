@@ -1,0 +1,102 @@
+.smash-container {
+    background: $background-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .smash-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        height: $header-height;
+        color: #fff;
+        line-height: $header-height;
+
+        .smash-title {
+            display: inline-block;
+            padding: 0 20px;
+        }
+
+        .smash-navigation {
+            float: right;
+        }
+    }
+
+    .smash-navigation {
+        display: table;
+        line-height: #{($header-height)-2};
+        .smash-item {
+            display: table-cell;
+            font-family: $header-font;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 0 20px;
+            cursor: pointer;
+            position: relative;
+            min-width: 100%;
+            &.smash-has-dropdown {
+                &:after {
+                    font-family: 'Material Icons';
+                    font-style: normal;
+                    font-weight: 400;
+                    content: "\E313";
+                    position: relative;
+                    top: 2px;
+                }
+
+                .smash-dropdown {
+                    color: #000;
+                    background: #fff;
+                    position: absolute;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    width: auto;
+                    min-width: 140px;
+                    right: 0;
+                    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+                    top: $header-height;
+                    visibility: hidden;
+                    @include opacity(0);
+                    transition: all 0.3s;
+                    li {
+                        padding: 5px 20px;
+                    }
+                    transition: all 0.3s;
+                }
+            }
+            &:hover {
+                .smash-dropdown {
+                    visibility: visible;
+                    @include opacity(1);
+                }
+            }
+        }
+    }
+
+    .smash-title {
+        font-family: $header-font;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: normal;
+        margin: 0;
+    }
+
+    .smash-workspace {
+        position: absolute;
+        background: $workspace-color;
+        top: 0;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        box-sizing: border-box;
+        &.smash-has-header {
+            top: $header-height;
+            border-radius: 2px 2px 0 0;
+        }
+    }
+}

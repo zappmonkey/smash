@@ -1,0 +1,23 @@
+{
+    "name": "smash",
+    "version": "0.0.0",
+    "description": "smash js application framework",
+    "private": true,
+    "repository": "",
+    "engines": {
+        "node": ">= 4.0.0"
+    },
+    "author": "Mark Freese",
+    "license": "MIT",
+    "devDependencies": {
+        "gulp": "",
+        "gulp-sass": "",
+        "gulp-sourcemaps": "",
+        "gulp-concat": "",
+        "gulp-uglify": "",
+        "gulp-cssnano": "",
+        "gulp-cleanhtml": ""
+    },
+    "dependencies": {
+    }
+}

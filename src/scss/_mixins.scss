@@ -1,0 +1,72 @@
+@mixin optional-at-root($sel) {
+	@at-root #{if(not &, $sel, selector-append(&, $sel))} {
+	    @content;
+	}
+}
+
+@mixin placeholder {
+	@include optional-at-root('::-webkit-input-placeholder') {
+		@content;
+	}
+
+	@include optional-at-root(':-moz-placeholder') {
+		@content;
+	}
+
+	@include optional-at-root('::-moz-placeholder') {
+		@content;
+	}
+
+	@include optional-at-root(':-ms-input-placeholder') {
+		@content;
+	}
+}
+
+@mixin prefix($name, $argument) {
+	-webkit-#{$name}: #{$argument};
+	-moz-#{$name}: #{$argument};
+    -ms-#{$name}: #{$argument};
+	-o-#{$name}: #{$argument};
+	#{$name}: #{$argument};
+}
+
+@mixin suffix($name, $argument) {
+	#{$name}: -webkit-#{$argument};
+	#{$name}: -moz-#{$argument};
+    #{$name}: -ms-#{$argument};
+	#{$name}: -o-#{$argument};
+	#{$name}: #{$argument};
+}
+
+@mixin opacity($trans) {
+	filter: unquote("alpha(opacity = (#{$trans * 100}))");
+	-moz-opacity: $trans;
+	-khtml-opacity: $trans;
+	opacity: #{$trans};
+}
+
+@mixin user-select($select) {
+	-moz-user-select: -moz-#{$select};
+	-khtml-user-select: $select;
+	-webkit-user-select: $select;
+	-o-user-select: $select;
+	user-select: $select;
+}
+
+@mixin flex($fg: 1, $fs: null, $fb: null) {
+	// Set a variable to be used by box-flex properties
+	$fg-boxflex: $fg;
+
+	// Box-Flex only supports a flex-grow value so let's grab the
+	// first item in the list and just return that.
+	@if type-of($fg) == 'list' {
+		$fg-boxflex: nth($fg, 1);
+	}
+
+	-webkit-box-flex: $fg-boxflex;
+	-webkit-flex: $fg $fs $fb;
+	-moz-box-flex: $fg-boxflex;
+	-moz-flex: $fg $fs $fb;
+	-ms-flex: $fg $fs $fb;
+	flex: $fg $fs $fb;
+}
