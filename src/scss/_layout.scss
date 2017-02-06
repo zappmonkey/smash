@@ -16,6 +16,27 @@
         color: #fff;
         line-height: $header-height;
 
+        display: -ms-flexbox;
+        display: flex;
+
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        -ms-flex-align: center;
+        align-items: center;
+
+        &>* {
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+        }
+
         .smash-title {
             display: inline-block;
             padding: 0 20px;
@@ -27,8 +48,10 @@
     }
 
     .smash-navigation {
+
         display: table;
         line-height: #{($header-height)-2};
+
         .smash-item {
             display: table-cell;
             font-family: $header-font;
@@ -38,7 +61,9 @@
             cursor: pointer;
             position: relative;
             min-width: 100%;
+
             &.smash-has-dropdown {
+
                 &:after {
                     font-family: 'Material Icons';
                     font-style: normal;
@@ -46,6 +71,7 @@
                     content: "\E313";
                     position: relative;
                     top: 2px;
+                    color: rgba(255,255,255,0.5);
                 }
 
                 .smash-dropdown {
@@ -60,19 +86,22 @@
                     right: 0;
                     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
                     top: $header-height;
-                    visibility: hidden;
-                    @include opacity(0);
-                    transition: all 0.3s;
+                    display: none;
                     li {
-                        padding: 5px 20px;
+                        padding: 0 20px;
+                        &:hover {
+                            background: rgba(0,0,0,0.05);
+                        }
                     }
-                    transition: all 0.3s;
                 }
             }
+
             &:hover {
                 .smash-dropdown {
-                    visibility: visible;
-                    @include opacity(1);
+                    display: block;
+                }
+                &:after {
+                    color: #fff;
                 }
             }
         }
@@ -96,7 +125,119 @@
         box-sizing: border-box;
         &.smash-has-header {
             top: $header-height;
-            border-radius: 2px 2px 0 0;
+        }
+    }
+}
+
+.smash-spacer {
+    transition: all .5s;
+    min-width: 20px;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.smash-searchbox {
+    padding: 0;
+    margin: 0 20px;
+    position: relative;
+    width: 200px;
+    transition: all .5s;
+
+    .material-icons {
+        margin: 7px 10px 0;
+        position: absolute;
+        font-size: 18px;
+    }
+
+    input {
+        font: 13px/14px Roboto, sans-serif;
+        border-radius: 2px;
+        padding: 6px 8px 6px 36px;
+        vertical-align: text-bottom;
+        background: hsla(0, 0%, 100%, .2);
+        border: none;
+        color: #fff;
+        outline: none;
+        width: 100%;
+        transition: all .5s
+    }
+}
+
+.smash-searchbox input::-webkit-input-placeholder {
+    color: #fff;
+    padding-top: 1px
+}
+
+.smash-searchbox input:-moz-placeholder, .smash-searchbox input::-moz-placeholder {
+    color: #fff;
+    padding-top: 1px
+}
+
+.smash-searchbox input:-ms-input-placeholder {
+    color: #fff;
+    padding-top: 1px
+}
+
+.is-focussed .smash-spacer {
+    -webkit-box-flex: 0;
+    -moz-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto
+}
+
+.is-focussed .smash-searchbox {
+    -webkit-box-flex: 1;
+    -moz-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto
+}
+
+.is-focussed .smash-searchbox .material-icons {
+    color: #999
+}
+
+.is-focussed .smash-searchbox input {
+    color: #333;
+    background: hsla(0, 0%, 100%, .9)
+}
+
+.is-focussed .smash-searchbox input::-webkit-input-placeholder {
+    color: #999
+}
+
+.is-focussed .smash-searchbox input:-moz-placeholder, .is-focussed .smash-searchbox input::-moz-placeholder {
+    color: #999
+}
+
+.is-focussed .smash-searchbox input:-ms-input-placeholder {
+    color: #999
+}
+
+.smash-icon-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    overflow: hidden;
+    border-right: 1px solid #ccc;
+    ul {
+        padding: 5px 0 0;
+        margin: 0;
+        min-width: 200px;
+        li {
+            i {
+                width: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+            span {
+                font-family: $header-font;
+                font-size: 12px;
+                text-transform: uppercase;
+                vertical-align: top;
+                line-height: 40px;
+            }
         }
     }
 }
