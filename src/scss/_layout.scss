@@ -90,7 +90,7 @@
                     li {
                         padding: 0 20px;
                         &:hover {
-                            background: rgba(0,0,0,0.05);
+                            background: $light-hover-color;
                         }
                     }
                 }
@@ -221,19 +221,38 @@
     width: 40px;
     overflow: hidden;
     border-right: 1px solid #ccc;
+    transition: all 0.3s;
+    &:hover {
+        width: 200px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        border-right: 1px solid #bbb;
+    }
+    i {
+        width: 40px;
+        line-height: 38px;
+        text-align: center;
+        color: $icon-color;
+        font-size: 20px;
+        &.fa {
+            font-size: 16px;
+        }
+        &.lock, &.unlock {
+            position: absolute;
+            bottom: 0;
+        }
+    }
     ul {
         padding: 5px 0 0;
         margin: 0;
         min-width: 200px;
         li {
-            i {
-                width: 40px;
-                line-height: 40px;
-                text-align: center;
+            cursor: pointer;
+            &:hover {
+                background: $light-hover-color;
             }
             span {
                 font-family: $header-font;
-                font-size: 12px;
+                font-size: 11px;
                 text-transform: uppercase;
                 vertical-align: top;
                 line-height: 40px;
