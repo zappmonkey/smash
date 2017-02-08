@@ -1,3 +1,7 @@
+* {
+    outline: none;
+}
+
 .smash-container {
     background: $background-color;
     position: absolute;
@@ -131,7 +135,7 @@
         width: 100%;
         bottom: 0;
         box-sizing: border-box;
-        &.smash-has-header {
+        &.has-header {
             top: $header-height;
         }
     }
@@ -221,15 +225,18 @@
     color: #999
 }
 
-.smash-icon-bar {
+.smash-sidebar {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     width: 40px;
     overflow: hidden;
+    background: $workspace-color;
     border-right: 1px solid #ccc;
     transition: all 0.3s;
+    z-index: 1;
+
     &.is-unlocked:hover {
         width: 200px;
         box-shadow: 0 0 5px rgba(0,0,0,0.3);
@@ -284,6 +291,97 @@
                 text-transform: uppercase;
                 vertical-align: top;
                 line-height: 40px;
+            }
+        }
+    }
+}
+
+.smash-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+
+.has-sidebar {
+    .smash-panel {
+        left: 40px;
+    }
+}
+
+.smash-input, .smash-select {
+    margin-top: 18px;
+    padding: 5px 10px;
+    background: #fff;
+    border: 1px solid #aaa;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+
+    input {
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: normal;
+        background: 0;
+        border: none;
+    }
+
+    select {
+        display: none;
+    }
+
+    label {
+        position: absolute;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-weight: normal;
+        font-size: 13px;
+        top: 8px;
+        left: 12px;
+        color: rgba(0,0,0,0);
+        visibility: hidden;
+        transition: all 0.2s;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+        &.show {
+            visibility: visible;
+            font-size: 11px;
+            top: -16px;
+            left: 4px;
+            color: rgba(0,0,0,0.3);
+        }
+    }
+}
+
+.smash-select {
+    &:after {
+        font-family: "Material Icons";
+        font-size: 16px;
+        color: #999;
+        content: "\E313";
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
+    ul {
+        position: absolute;
+        top: 31px;
+        left: -1px;
+        width: 100%;
+        border: 1px solid #aaa;
+        background: #fff;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            font-weight: normal;
+            font-size: 13px;
+            padding: 8px 10px;
+            color: #999;
+            &:hover {
+                background: $light-hover-color;
             }
         }
     }
