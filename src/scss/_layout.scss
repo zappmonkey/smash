@@ -213,7 +213,7 @@
     color: #999
 }
 
-.smash-icon-menu {
+.smash-icon-bar {
     position: absolute;
     top: 0;
     left: 0;
@@ -222,7 +222,7 @@
     overflow: hidden;
     border-right: 1px solid #ccc;
     transition: all 0.3s;
-    &:hover {
+    &.is-unlocked:hover {
         width: 200px;
         box-shadow: 0 0 5px rgba(0,0,0,0.3);
         border-right: 1px solid #bbb;
@@ -233,12 +233,32 @@
         text-align: center;
         color: $icon-color;
         font-size: 20px;
+
         &.fa {
             font-size: 16px;
         }
-        &.lock, &.unlock {
+
+        &.lock {
             position: absolute;
             bottom: 0;
+            &::before {
+                content: "\E898";
+            }
+            &:hover {
+                &::before {
+                    content: "\E899";
+                }
+            }
+        }
+        &.unlock {
+            &::before {
+                content: "\E899";
+            }
+            &:hover {
+                &::before {
+                    content: "\E898";
+                }
+            }
         }
     }
     ul {
