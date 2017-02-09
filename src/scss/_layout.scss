@@ -76,6 +76,12 @@
             position: relative;
             min-width: 100%;
 
+            .material-icons {
+                font-size: 20px;
+                position: relative;
+                top: 5px;
+            }
+
             &.smash-has-dropdown {
 
                 &:after {
@@ -380,7 +386,7 @@
         width: 100%;
         border: 1px solid #aaa;
         background: #fff;
-        box-shadow: 0 4px 2px -1px rgba(0,0,0,0.2);
+        box-shadow: 0 3px 5px -2px rgba(0,0,0,0.2);
         list-style: none;
         padding: 0;
         margin: 0;

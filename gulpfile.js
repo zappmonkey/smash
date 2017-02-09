@@ -27,10 +27,33 @@ function sass_dev() {
 		.pipe(gulp.dest('./example/css'));
 }
 
+function js_dist() {
+	return gulp.src(['./src/js/smash.js', './src/js/modules/**/*.js'])
+		.pipe(concat('smash.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/js'));
+}
+
+function sass_dist() {
+	return gulp.src('./src/scss/smash.scss')
+		// Initializes sourcemaps
+		.pipe(sass({
+			errLogToConsole: true
+		}))
+		.pipe(cssnano())
+		.pipe(gulp.dest('./dist/css'));
+}
+
+// Generate file for distribution
+gulp.task("dist", function() {
+	// Setup the files
+	sass_dist();
+	js_dist();
+});
+
 // The Default task start go application and watches changes
 gulp.task("default", function() {
 	// Setup the files
-	// components();
 	sass_dev();
 	js_dev();
 
