@@ -48,23 +48,40 @@ smash.input.init = function() {
                 li.setAttribute("value", option.value);
                 li.innerHTML = option.innerHTML;
                 ul.appendChild(li);
-                li.onclick = function() {
+                li.onmousedown = function(e) {
                     var val = this.getAttribute('value');
-                    this.parentElement.parentElement.querySelector("select").value = val;
-                    this.parentElement.parentElement.querySelector("input").value = this.innerHTML;
+                    var parent = this.parentElement.parentElement;
+                    smash.class.remove(parent, 'is-focussed');
+                    window.onmousedown = null;
+                    parent.querySelector("select").value = val;
+                    parent.querySelector("input").value = this.innerHTML;
+                    parent.querySelector("input").focus();
+                    parent.querySelector("input").onfocus();
+                    e.stopPropagation();
                 }
             }
         }
         select.parentElement.appendChild(ul);
-        input.onchange = function(e) {
+        input.onfocus = function(e) {
             var l = this.parentElement.querySelector("label");
             if (l) {
-                if (e.srcElement.value != "") {
+                if (this.value != "") {
                     smash.class.add(l, 'show');
                 } else {
                     smash.class.remove(l, 'show');
                 }
             }
         };
+
+        select.parentElement.onclick = function() {
+            smash.class.add(this, 'is-focussed');
+            var select = this;
+            window.onmousedown = function() {
+                console.log("click outside");
+                window.onmousedown = null;
+                smash.class.remove(select, 'is-focussed');
+            };
+        };
+
     }
 };

@@ -1,5 +1,7 @@
 * {
     outline: none;
+    text-rendering:  optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 .smash-container {
@@ -156,15 +158,18 @@
     transition: all .5s;
 
     .material-icons {
-        margin: 7px 10px 0;
         position: absolute;
         font-size: 18px;
+        top: 4px;
+        left: 10px;
+        margin: 0;
     }
 
     input {
         font: 13px/14px Roboto, sans-serif;
         border-radius: 2px;
         padding: 6px 8px 6px 36px;
+        margin: 0;
         vertical-align: text-bottom;
         background: hsla(0, 0%, 100%, .2);
         border: none;
@@ -313,12 +318,12 @@
 
 .smash-input, .smash-select {
     margin-top: 18px;
-    padding: 5px 10px;
     background: #fff;
     border: 1px solid #aaa;
     display: inline-block;
     border-radius: 2px;
     position: relative;
+    height: 30px;
 
     input {
         font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -326,6 +331,9 @@
         font-weight: normal;
         background: 0;
         border: none;
+        line-height: 18px;
+        margin: 0;
+        padding: 6px 10px;
     }
 
     select {
@@ -364,25 +372,38 @@
         right: 8px;
         top: 8px;
     }
+
     ul {
         position: absolute;
-        top: 31px;
+        top: 30px;
         left: -1px;
         width: 100%;
         border: 1px solid #aaa;
         background: #fff;
+        box-shadow: 0 4px 2px -1px rgba(0,0,0,0.2);
         list-style: none;
         padding: 0;
         margin: 0;
+        display: none;
+
         li {
             font-family: Roboto, Helvetica, Arial, sans-serif;
             font-weight: normal;
             font-size: 13px;
             padding: 8px 10px;
             color: #999;
+            cursor: pointer;
+
             &:hover {
+                color: #333;
                 background: $light-hover-color;
             }
+        }
+    }
+
+    &.is-focussed {
+        ul {
+            display: block;
         }
     }
 }
