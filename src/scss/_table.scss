@@ -1,0 +1,30 @@
+table {
+    font-family: $font;
+    font-size: $font-size;
+    border-collapse: collapse;
+    background: #fff;
+
+    tr {
+        border: 1px solid #aaa;
+    }
+
+    td, th {
+        padding: 9px 7px;
+        &:first-child {
+            padding-left: 15px;
+        }
+        &:last-child {
+            padding-right: 15px;
+        }
+        &.numeric {
+            text-align: right;
+        }
+    }
+
+    &.clickable {
+        tbody tr:hover {
+            background: $light-hover-color;
+            cursor: pointer;
+        }
+    }
+}

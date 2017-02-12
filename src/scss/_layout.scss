@@ -46,14 +46,6 @@
         .smash-title {
             display: inline-block;
             padding: 0 10px 0 0;
-            i {
-                position: relative;
-                top: 6px;
-                width: 40px;
-                text-align: center;
-                margin-right: 5px;
-                color: $highlight-color;
-            }
         }
 
         .smash-navigation {
@@ -68,7 +60,7 @@
 
         .smash-item {
             display: table-cell;
-            font-family: $header-font;
+            font-family: $font;
             font-size: 12px;
             text-transform: uppercase;
             padding: 0 20px;
@@ -128,7 +120,7 @@
     }
 
     .smash-title {
-        font-family: $header-font;
+        font-family: $font;
         font-size: 14px;
         text-transform: uppercase;
         font-weight: normal;
@@ -172,9 +164,10 @@
     }
 
     input {
-        font: 13px/14px Roboto, sans-serif;
+        font-family: $font;
+        font-size: $font-size;
         border-radius: 2px;
-        padding: 6px 8px 6px 36px;
+        padding: 5px 8px 7px 36px;
         margin: 0;
         vertical-align: text-bottom;
         background: hsla(0, 0%, 100%, .2);
@@ -297,7 +290,7 @@
                 background: $light-hover-color;
             }
             span {
-                font-family: $header-font;
+                font-family: $font;
                 font-size: 11px;
                 text-transform: uppercase;
                 vertical-align: top;
@@ -333,7 +326,7 @@
 
     input {
         font-family: Roboto, Helvetica, Arial, sans-serif;
-        font-size: 13px;
+        font-size: $font-size;
         font-weight: normal;
         background: 0;
         border: none;
@@ -350,7 +343,7 @@
         position: absolute;
         font-family: Roboto, Helvetica, Arial, sans-serif;
         font-weight: normal;
-        font-size: 13px;
+        font-size: $font-size;
         top: 8px;
         left: 12px;
         color: rgba(0,0,0,0);
@@ -395,7 +388,7 @@
         li {
             font-family: Roboto, Helvetica, Arial, sans-serif;
             font-weight: normal;
-            font-size: 13px;
+            font-size: $font-size;
             padding: 8px 10px;
             color: #999;
             cursor: pointer;

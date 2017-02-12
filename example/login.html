@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/smash.css" type="text/css">
+        <link rel="stylesheet" href="./css/example.css" type="text/css">
+        <script src="https://use.fontawesome.com/a68ff21833.js"></script>
+    </head>
+    <body>
+        <div class="smash-container">
+            <div class="login">
+                <span class="logo-icon">
+                    <i class="material-icons">style</i>
+                    <i class="material-icons top">airplanemode_active</i>
+                </span>
+                <span class="title">TRIP BUILDER</span>
+                <span class="google-login">
+                    <img src="./img/google.svg" width="24px">
+                    Sign in with <strong>Google</strong>
+                </span>
+            </div>
+            <a href="https://1tis.nl" target="_blank" class="powered-by">
+                Powered by <strong>One Travel Industry Solution</strong><img src="./img/logo_white.png" height="24px">
+            </a>
+        </div>
+        <script src="./js/smash.js"></script>
+        <script>
+        document.querySelector(".google-login").onclick = function() {
+            smash.ajax.get('http://cms-api.nrv.nl.dev.local/auth/redirect_url', function(data) {
+                console.log(data);
+            }, {return_url: 'http://sitebuilder-dev.nrv.nl'}, 'json');
+            smash.ajax.get('http://cms-api.nrv.nl.dev.local/auth/redirect_url', function(data) {
+                console.log(data);
+            }, {return_url: 'http://sitebuilder-dev.nrv.nl'});
+        };
+        </script>
+    </body>
+</html>

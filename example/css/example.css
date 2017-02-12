@@ -1,0 +1,72 @@
+.logo-icon {
+    position: relative;
+    color: rgba(255,255,255,0.5);
+    display: inline-block;
+    top: 6px;
+    width: 40px;
+    text-align: center;
+}
+
+.logo-icon .top {
+        position: absolute;
+        top: 0;
+        left: 16px;
+        color: rgb(255, 193, 7);
+        transform: rotate(60deg);
+        text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.5);
+        font-size: 24px;
+}
+
+.login {
+    position: absolute;
+    left: calc(50% - 60px);
+    top: calc(50% - 140px);
+}
+
+.login .logo-icon {
+    transform: scale(10);
+}
+
+.login .title {
+    position: absolute;
+    top: 140px;
+    width: 240px;
+    color: rgba(255,255,255,0.8);
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    left: -50px;
+}
+
+.login .google-login, .powered-by {
+    position: absolute;
+    top: 190px;
+    left: -40px;
+    width: 200px;
+    color: rgba(255,255,255,0.8);
+    font-family: 'Roboto', sans-serif;
+    line-height: 40px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login .google-login img {
+    position: relative;
+    top: 5px;
+    margin-right: 5px;
+}
+
+.powered-by {
+    transform: translate(-50%,0);
+    left: 50%;
+    bottom: 0;
+    top: auto;
+    font-size: 12px;
+    width: auto;
+    opacity: 0.5;
+}
+
+.powered-by img {
+    position: relative;
+    top: 7px;
+    margin-left: 5px;
+}
