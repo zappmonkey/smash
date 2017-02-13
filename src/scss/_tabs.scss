@@ -1,0 +1,36 @@
+.smash-tab-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .smash-tabs {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+
+        .smash-tab {
+            position: relative;
+            display: table-cell;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: none;
+            padding: 0 14px 0 10px;
+            line-height: 28px;
+            border-bottom: $border;
+            border-right: $border;
+            font-family: $font;
+            font-size: $font-size - 1px;
+            cursor: pointer;
+
+            i {
+                position: absolute;
+                font-size: 12px;
+                top: 8px;
+                right: 4px;
+            }
+        }
+    }
+}

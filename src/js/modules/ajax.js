@@ -35,7 +35,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
 			if (x.status == 200 || x.status == 201) {
 				callback && callback(x.response);
 			} else {
-                alert(x.status);
+                console.log(x.status, x.response);
 			}
 		}
     };

@@ -18,3 +18,20 @@ smash.workspace.init = function() {
         smash.class.add(smash.workspace._ws_, 'has-sidebar');
     }
 };
+
+smash.workspace.addTab = function(id, title, content) {
+    if (!smash.get(document, '.smash-tab-pane')) {
+        var panel = smash.get(document, '.smash-panel');
+        if (!panel) {
+            console.log('To add a tab there needs to be a panel');
+            return;
+        }
+        panel.innerHTML = '<div class="smash-tab-pane"><div class="smash-tabs"></div><div class="smash-panes"></div></div>';
+    }
+    var tabs = smash.get(document, '.smash-tab-pane .smash-tabs');
+    var panesContainer = smash.get(document, '.smash-tab-pane .smash-panes');
+
+    tabs.innerHTML = tabs.innerHTML + '<div class="smash-tab active">' + title + '<i class="material-icons close">close</i></div>';
+    smash.hide(panesContainer, ".smash-pane");
+    panesContainer.innerHTML = panesContainer.innerHTML + '<div class="smash-pane">' + content + '</div>';
+};

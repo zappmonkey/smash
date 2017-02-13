@@ -64,7 +64,7 @@
             <div class="smash-workspace">
                 <div class="smash-sidebar">
                     <ul>
-                        <li>
+                        <li class="templates">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             <span>Page Templates</span>
                         </li>
@@ -88,63 +88,71 @@
                     <i class="material-icons lock"></i>
                 </div>
                 <div class="smash-panel">
-                    <div style="padding:20px">
-                        <div class="smash-input has-floating-label">
-                            <input type="text" name="email" placeholder="Email"/>
+                    <div class="smash-pane">
+                        <div style="padding:20px">
+                            <div class="smash-input has-floating-label">
+                                <input type="text" name="email" placeholder="Email"/>
+                            </div>
+                            <div class="smash-input has-floating-label">
+                                <input type="password" name="password" placeholder="Password"/>
+                            </div>
+                            <br/>
+                            <div class="smash-input has-floating-label">
+                                <input type="text" name="adres" placeholder="Adres"/>
+                            </div>
+                            <div class="smash-select has-floating-label">
+                                <select name="adres" placeholder="Select an option">
+                                    <option>Select an option</option>
+                                    <option value="1">Value 1</option>
+                                    <option value="2">Value 2</option>
+                                    <option value="3">Value 3</option>
+                                </select>
+                            </div>
+                            <table class="clickable">
+                                <thead>
+                                    <tr>
+                                        <th>header 1</th>
+                                        <th>header 2</th>
+                                        <th>header 3</th>
+                                        <th>header 4</th>
+                                        <th>header 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>content 1</td>
+                                        <td>content 2</td>
+                                        <td>content 3</td>
+                                        <td>content 4</td>
+                                        <td>content 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>content 1</td>
+                                        <td>content 2</td>
+                                        <td>content 3</td>
+                                        <td>content 4</td>
+                                        <td>content 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>content 1</td>
+                                        <td>content 2</td>
+                                        <td>content 3</td>
+                                        <td>content 4</td>
+                                        <td>content 5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="smash-input has-floating-label">
-                            <input type="password" name="password" placeholder="Password"/>
-                        </div>
-                        <br/>
-                        <div class="smash-input has-floating-label">
-                            <input type="text" name="adres" placeholder="Adres"/>
-                        </div>
-                        <div class="smash-select has-floating-label">
-                            <select name="adres" placeholder="Select an option">
-                                <option>Select an option</option>
-                                <option value="1">Value 1</option>
-                                <option value="2">Value 2</option>
-                                <option value="3">Value 3</option>
-                            </select>
-                        </div>
-                        <table class="clickable">
-                            <thead>
-                                <tr>
-                                    <th>header 1</th>
-                                    <th>header 2</th>
-                                    <th>header 3</th>
-                                    <th>header 4</th>
-                                    <th>header 5</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>content 1</td>
-                                    <td>content 2</td>
-                                    <td>content 3</td>
-                                    <td>content 4</td>
-                                    <td>content 5</td>
-                                </tr>
-                                <tr>
-                                    <td>content 1</td>
-                                    <td>content 2</td>
-                                    <td>content 3</td>
-                                    <td>content 4</td>
-                                    <td>content 5</td>
-                                </tr>
-                                <tr>
-                                    <td>content 1</td>
-                                    <td>content 2</td>
-                                    <td>content 3</td>
-                                    <td>content 4</td>
-                                    <td>content 5</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
         <script src="./js/smash.js"></script>
+        <script>
+        document.querySelector(".smash-sidebar .templates").onclick = function() {
+            var tabs = smash.getAll(document, '.smash-tabs .smash-tab');
+            smash.workspace.addTab("test", "Test file " + (tabs.length+1), "<div>Test content " + (tabs.length+1) + "</div>");
+        };
+        </script>
     </body>
 </html>

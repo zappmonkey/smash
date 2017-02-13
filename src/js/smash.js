@@ -2,12 +2,44 @@ window.onload = function(e){
     smash.init();
 }
 
-var smash = {
-    init: function() {
-        smash.config.init();
-        smash.sidebar.init();
-        smash.searchbox.init();
-        smash.workspace.init();
-        smash.input.init();
+var smash = {};
+
+smash.init = function() {
+    smash.config.init();
+    smash.sidebar.init();
+    smash.searchbox.init();
+    smash.workspace.init();
+    smash.input.init();
+};
+
+smash.get = function(parent, selector) {
+    try {
+        return parent.querySelector(selector);
+    } catch(e) {
+        console.log(e);
+    }
+    return undefined;
+};
+
+smash.getAll = function(parent, selector) {
+    try {
+        return parent.querySelectorAll(selector);
+    } catch(e) {
+        console.log(e);
+    }
+    return undefined;
+};
+
+smash.hide = function(parent, selector) {
+    var el = smash.getAll(parent, selector);
+    for (var i=0; i<el.length; i++) {
+        el[i].style.display = 'none';
+    }
+};
+
+smash.show = function(parent, selector) {
+    var el = smash.getAll(parent, selector);
+    for (var i=0; i<el.length; i++) {
+        el[i].style.display = '';
     }
 };
