@@ -25,11 +25,20 @@
             font-size: $font-size - 1px;
             cursor: pointer;
 
+            &.active {
+                color: #fff;
+                background: $highlight-color;
+            }
+
             i {
                 position: absolute;
                 font-size: 12px;
                 top: 8px;
                 right: 4px;
+                @include opacity(0.5);
+                &:hover {
+                    @include opacity(1);
+                }
             }
         }
     }
