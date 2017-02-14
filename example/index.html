@@ -151,7 +151,7 @@
         <script>
         document.querySelector(".smash-sidebar .templates").onclick = function() {
             var tabs = smash.getAll(document, '.smash-tabs .smash-tab');
-            smash.workspace.addTab("test", "Test file " + (tabs.length+1), "<div>Test content " + (tabs.length+1) + "</div>");
+            smash.workspace.addTab("test-" + (tabs.length+1), "Test file " + (tabs.length+1), "<div>Test content " + (tabs.length+1) + "</div>");
         };
         </script>
     </body>

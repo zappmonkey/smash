@@ -237,7 +237,7 @@
     width: 40px;
     overflow: hidden;
     background: $workspace-color;
-    border-right: 1px solid #ccc;
+    border-right: $border;
     transition: all 0.3s;
     z-index: 1;
 
