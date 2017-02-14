@@ -43,3 +43,10 @@ smash.show = function(parent, selector) {
         el[i].style.display = '';
     }
 };
+
+smash.on = function(parent, selector, event, callback) {
+    var elements = smash.getAll(parent, selector);
+    for (var i=0; i<elements.length; i++) {
+        elements[i][event] = callback;
+    }
+}

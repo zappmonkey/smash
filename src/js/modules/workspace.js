@@ -1,7 +1,8 @@
 smash.workspace = {
     _ws_: undefined,
     _hdr_: undefined,
-    _sb_: undefined
+    _sb_: undefined,
+    _tabs_: []
 };
 
 smash.workspace.init = function() {
@@ -37,14 +38,11 @@ smash.workspace.addTab = function(id, title, content) {
     }
     tabs.innerHTML = tabs.innerHTML + '<div class="smash-tab active" data-id="' + id + '">' + title + '<i class="material-icons close">close</i></div>';
     panesContainer.innerHTML = panesContainer.innerHTML + '<div class="smash-pane" data-id="' + id + '">' + content + '</div>';
-    if (test = smash.get(tabs, '.smash-tab.active')) {
-        console.log('test 1');
-        test.onclick = function(e) {
-            console.log('test');
-            if (active = smash.get(tabs, '.smash-tab.active')) {
-                smash.class.remove(active, 'active');
-            }
-            smash.class.add(this, 'active');
+    smash.on(tabs, '.smash-tab', 'onclick', function(e) {
+        console.log('test');
+        if (active = smash.get(tabs, '.smash-tab.active')) {
+            smash.class.remove(active, 'active');
         }
-    }
+        smash.class.add(this, 'active');
+    });
 };
