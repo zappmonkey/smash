@@ -39,7 +39,9 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
 			}
 		}
     };
-    if (method == 'POST') {
+    if (responseType == 'json') {
+        x.setRequestHeader('Content-type', 'application/json');
+    } else if (method == 'POST') {
         x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     }
     x.send(data)
