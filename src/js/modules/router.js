@@ -103,3 +103,13 @@ smash.router.parseRoute = function(path) {
     }
     return route;
 };
+
+smash.router.queryParam = function(param) {
+    var regexS = "[\\?&]"+param+"=([^&#]*)",
+    regex = new RegExp( regexS ),
+    results = regex.exec( window.location.search );
+    if( results == null ){
+        return undefined;
+    }
+    return results[1];//decodeURIComponent(results[1].replace(/\+/g, " "));
+};

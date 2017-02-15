@@ -1,6 +1,6 @@
-window.onload = function(e){
+window.addEventListener("load", function(e){
     smash.init();
-}
+}, false);
 
 var smash = {};
 
