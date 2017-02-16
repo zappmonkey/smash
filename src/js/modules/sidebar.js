@@ -9,11 +9,11 @@ smash.sidebar.init = function() {
     var sibl = document.querySelector(".smash-sidebar .lock");
     if (!sibl) {
         return;
-    } else {
-        sibl.onclick = function() {
-            smash.sidebar.toggleLock();
-        };
     }
+    sibl.onclick = function() {
+        smash.sidebar.toggleLock();
+    };
+
     var sib = document.querySelector(".smash-sidebar");
     smash.class.add(sib, 'is-unlocked');
     smash.sidebar.i_ = true;

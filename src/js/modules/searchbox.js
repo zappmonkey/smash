@@ -7,13 +7,14 @@ smash.searchbox.init = function() {
         return;
     }
     var ssb = document.querySelector(".smash-searchbox input");
-    if (ssb) {
-        ssb.onfocus = function() {
-            smash.class.add(document.querySelector(".smash-header"), 'is-focussed');
-        };
-        ssb.onblur = function() {
-            smash.class.remove(document.querySelector(".smash-header"), 'is-focussed');
-        };
+    if (!ssb) {
+        return;
     }
+    ssb.onfocus = function() {
+        smash.class.add(document.querySelector(".smash-header"), 'is-focussed');
+    };
+    ssb.onblur = function() {
+        smash.class.remove(document.querySelector(".smash-header"), 'is-focussed');
+    };
     smash.searchbox.i_ = true;
 };
