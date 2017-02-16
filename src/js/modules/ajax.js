@@ -1,6 +1,12 @@
-smash.ajax = {};
+smash.ajax = {
+    _headers_: []
+};
 
-smash.ajax.x = function () {
+smash.ajax.addHeader = function(name, value) {
+    smash.ajax._headers_[name] = value;
+};
+
+smash.ajax._xhr_ = function () {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
     }
@@ -27,7 +33,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     if (async === undefined) {
         async = true;
     }
-    var x = smash.ajax.x();
+    var x = smash.ajax._xhr_();
     x.responseType = responseType;
     x.open(method, url, async);
     x.onreadystatechange = function () {
@@ -43,6 +49,9 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
         x.setRequestHeader('Content-type', 'application/json');
     } else if (method == 'POST') {
         x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+    for (var name in smash.ajax._headers_) {
+        x.setRequestHeader(name, smash.ajax._headers_[name]);
     }
     x.send(data)
 };
