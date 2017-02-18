@@ -222,7 +222,7 @@
         }
     }
     &.colored {
-        border-color: $primary-color;
+        border-color: rgba(0,0,0,0.05);
         background: $primary-color;
     }
 }
