@@ -15,13 +15,18 @@ smash.searchbox.init = function() {
         return;
     }
     ssb.onfocus = function() {
+        if (this.value.length == 0) {
+            smash.searchbox.results('<div class="smash-instruction">Start typing to find results</div>');
+        }
         smash.class.add(document.querySelector(".smash-header"), 'is-focussed');
+        smash.class.add(document.querySelector(".smash-searchbox .smash-searchbox-results"), 'show');
         if (smash.searchbox.onfocus) {
             smash.searchbox.onfocus();
         }
     };
     ssb.onblur = function() {
         smash.class.remove(document.querySelector(".smash-header"), 'is-focussed');
+        smash.class.remove(document.querySelector(".smash-searchbox .smash-searchbox-results"), 'show');
         if (smash.searchbox.onblur) {
             smash.searchbox.onblur();
         }
@@ -35,4 +40,9 @@ smash.searchbox.init = function() {
         }
     };
     smash.searchbox.i_ = true;
+};
+
+smash.searchbox.results = function(content) {
+    var results = document.querySelector(".smash-searchbox .smash-searchbox-results");
+    results.innerHTML = content;
 };

@@ -148,52 +148,6 @@
     flex-grow: 1;
 }
 
-.smash-searchbox {
-    padding: 0;
-    margin: 0 20px;
-    position: relative;
-    width: 200px;
-    transition: all .5s;
-
-    .material-icons {
-        position: absolute;
-        font-size: 18px;
-        top: 5px;
-        left: 10px;
-        margin: 0;
-    }
-
-    input {
-        font-family: $font;
-        font-size: $font-size;
-        border-radius: 2px;
-        padding: 6px 8px 7px 36px;
-        margin: 0;
-        vertical-align: text-bottom;
-        background: hsla(0, 0%, 100%, .2);
-        border: none;
-        color: #fff;
-        outline: none;
-        width: 100%;
-        transition: all .3s
-    }
-}
-
-.smash-searchbox input::-webkit-input-placeholder {
-    color: #fff;
-    padding-top: 1px
-}
-
-.smash-searchbox input:-moz-placeholder, .smash-searchbox input::-moz-placeholder {
-    color: #fff;
-    padding-top: 1px
-}
-
-.smash-searchbox input:-ms-input-placeholder {
-    color: #fff;
-    padding-top: 1px
-}
-
 .smash-button {
     margin-top: 18px;
     padding: 0 15px;

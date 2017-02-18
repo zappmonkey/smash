@@ -1,0 +1,70 @@
+.smash-searchbox {
+    padding: 0;
+    margin: 0 20px;
+    position: relative;
+    width: 200px;
+    transition: all .5s;
+
+    .material-icons {
+        position: absolute;
+        font-size: 18px;
+        top: 5px;
+        left: 10px;
+        margin: 0;
+    }
+
+    input {
+        font-family: $font;
+        font-size: $font-size;
+        border-radius: 2px;
+        padding: 6px 8px 7px 36px;
+        margin: 0;
+        vertical-align: text-bottom;
+        background: hsla(0, 0%, 100%, .2);
+        border: none;
+        color: #fff;
+        outline: none;
+        width: 100%;
+        transition: all .3s;
+
+        &::-webkit-input-placeholder {
+            color: #fff;
+            padding-top: 1px
+        }
+
+        &:-moz-placeholder, &::-moz-placeholder {
+            color: #fff;
+            padding-top: 1px
+        }
+
+        &:-ms-input-placeholder {
+            color: #fff;
+            padding-top: 1px
+        }
+    }
+
+    .smash-searchbox-results {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        font-family: $font;
+        font-size: $font-size;
+        box-shadow: $light-shadow;
+        transform: translateY(-110%);
+        visibility: hidden;
+        color: #333;
+        @include opacity(0);
+        transition: all .3s;
+
+        &.show {
+            transform: none;
+            visibility: visible;
+            @include opacity(1);
+        }
+        .smash-instruction {
+            padding: 0 20px;
+        }
+    }
+}
