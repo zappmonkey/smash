@@ -205,24 +205,31 @@
     position: relative;
     height: 32px;
     font-family: $font;
-    font-size: $font-size;
+    font-size: $font-size - 1px;
     text-transform: uppercase;
     font-weight: bold;
     line-height: 30px;
     transition: all .5s;
     box-shadow: $light-shadow;
+    cursor: pointer;
     &:disabled {
         box-shadow: none;
         @include opacity(0.5);
+        cursor: default;
     }
     &:hover {
         color: #333;
+        &.colored {
+            color: $colored-button-color-hover;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        }
         &:disabled {
             color: #666;
         }
     }
     &.colored {
         border-color: rgba(0,0,0,0.05);
+        color: $colored-button-color;
         background: $primary-color;
     }
 }
