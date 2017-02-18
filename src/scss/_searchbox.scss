@@ -57,6 +57,7 @@
         color: #333;
         @include opacity(0);
         transition: all .3s;
+        max-height: calc(100% - 50px);
 
         &.show {
             transform: none;
