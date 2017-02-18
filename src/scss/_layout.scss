@@ -158,7 +158,7 @@
     .material-icons {
         position: absolute;
         font-size: 18px;
-        top: 4px;
+        top: 5px;
         left: 10px;
         margin: 0;
     }
@@ -167,7 +167,7 @@
         font-family: $font;
         font-size: $font-size;
         border-radius: 2px;
-        padding: 5px 8px 7px 36px;
+        padding: 6px 8px 7px 36px;
         margin: 0;
         vertical-align: text-bottom;
         background: hsla(0, 0%, 100%, .2);
@@ -175,7 +175,7 @@
         color: #fff;
         outline: none;
         width: 100%;
-        transition: all .5s
+        transition: all .3s
     }
 }
 
@@ -192,6 +192,39 @@
 .smash-searchbox input:-ms-input-placeholder {
     color: #fff;
     padding-top: 1px
+}
+
+.smash-button {
+    margin-top: 18px;
+    padding: 0 15px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #aaa;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+    height: 32px;
+    font-family: $font;
+    font-size: $font-size;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 30px;
+    transition: all .5s;
+    box-shadow: $light-shadow;
+    &:disabled {
+        box-shadow: none;
+        @include opacity(0.5);
+    }
+    &:hover {
+        color: #333;
+        &:disabled {
+            color: #666;
+        }
+    }
+    &.colored {
+        border-color: $primary-color;
+        background: $primary-color;
+    }
 }
 
 .is-focussed .smash-spacer {
@@ -325,7 +358,7 @@
     height: 30px;
 
     input {
-        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-family: $font;
         font-size: $font-size;
         font-weight: normal;
         background: 0;
@@ -341,7 +374,7 @@
 
     label {
         position: absolute;
-        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-family: $font;
         font-weight: normal;
         font-size: $font-size;
         top: 8px;
@@ -379,14 +412,14 @@
         width: 100%;
         border: 1px solid #aaa;
         background: #fff;
-        box-shadow: 0 3px 5px -2px rgba(0,0,0,0.2);
+        box-shadow: $light-shadow;
         list-style: none;
         padding: 0;
         margin: 0;
         display: none;
 
         li {
-            font-family: Roboto, Helvetica, Arial, sans-serif;
+            font-family: $font;
             font-weight: normal;
             font-size: $font-size;
             padding: 8px 10px;
