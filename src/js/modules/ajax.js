@@ -44,6 +44,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
 			}
 		}
     };
+    x.open(method, url, async);
     if (responseType == 'json') {
         x.setRequestHeader('Content-type', 'application/json');
     } else if (method == 'POST') {
@@ -52,7 +53,6 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     for (var name in smash.ajax._headers_) {
         x.setRequestHeader(name, smash.ajax._headers_[name]);
     }
-    x.open(method, url, async);
     x.send(data)
 };
 
