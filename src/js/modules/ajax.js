@@ -35,7 +35,6 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     }
     var x = smash.ajax._xhr_();
     x.responseType = responseType;
-    x.open(method, url, async);
     x.onreadystatechange = function () {
 		if (x.readyState == 4) {
 			if (x.status == 200 || x.status == 201) {
@@ -53,6 +52,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     for (var name in smash.ajax._headers_) {
         x.setRequestHeader(name, smash.ajax._headers_[name]);
     }
+    x.open(method, url, async);
     x.send(data)
 };
 
