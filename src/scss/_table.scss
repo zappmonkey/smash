@@ -22,9 +22,17 @@ table {
     }
 
     &.clickable {
-        tbody tr:hover {
-            background: $light-hover-color;
-            cursor: pointer;
+        tbody {
+            tr {
+                &:hover {
+                    background: $light-hover-color;
+                    cursor: pointer;
+                }
+                 &.disabled:hover {
+                    background: none;
+                    cursor: default;
+                }
+            }
         }
     }
 }
