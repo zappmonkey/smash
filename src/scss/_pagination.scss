@@ -5,16 +5,26 @@
         font-size: $font-size - 2px;
         text-decoration: none;
         color: #666;
-        padding: 3px 6px;
         vertical-align: middle;
         text-align: center;
         display: inline-block;
         border-radius: 2px;
+        padding: 3px 4px;
+        height: 16px;
+        width: 14px;
+        line-height: 17px;
+        transition: all 0.3s;
+
         &:hover {
             color: #000;
+            background: $light-hover-color;
         }
         i {
             font-size: $font-size + 2px;
+            &.fa {
+                font-size: 7px;
+                padding: 4px 0;
+            }
         }
         &.active {
             background: $primary-color;
