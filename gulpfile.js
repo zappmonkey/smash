@@ -22,7 +22,7 @@ function sass_dev() {
 		.pipe(sass({
 			errLogToConsole: true
 		}))
-		.pipe(cssnano())
+		.pipe(cssnano({zindex: false}))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./example/css'));
 }
@@ -40,7 +40,7 @@ function sass_dist() {
 		.pipe(sass({
 			errLogToConsole: true
 		}))
-		.pipe(cssnano())
+		.pipe(cssnano({zindex: false}))
 		.pipe(gulp.dest('./dist/css'));
 }
 

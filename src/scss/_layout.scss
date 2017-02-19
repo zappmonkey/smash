@@ -234,7 +234,7 @@
     background: $workspace-color;
     border-right: $border;
     transition: all 0.3s;
-    z-index: 10;
+    z-index: 18;
 
     &.is-unlocked:hover {
         width: 200px;
