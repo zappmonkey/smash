@@ -21,6 +21,10 @@ table {
         }
     }
 
+    th {
+        text-align: left;
+    }
+
     &.clickable {
         tbody {
             tr {
