@@ -24,8 +24,12 @@ smash.router.add = function(path, callback) {
 };
 
 smash.router.set = function(route) {
-    window.history.pushState("", "", route);
+    smash.router.displayURL(route);
     window.dispatchEvent(new Event('popstate'));
+};
+
+smash.router.displayURL = function(route) {
+    window.history.pushState("", "", route);
 };
 
 smash.router.redirect = function(route) {

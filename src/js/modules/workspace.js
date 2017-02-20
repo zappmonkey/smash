@@ -20,7 +20,7 @@ smash.workspace.init = function() {
     }
 };
 
-smash.workspace.addTab = function(id, title, content) {
+smash.workspace.addTab = function(id, title, content, url) {
     if (!smash.get(document, '.smash-tab-pane')) {
         var panel = smash.get(document, '.smash-panel');
         if (!panel) {
@@ -47,6 +47,7 @@ smash.workspace.addTab = function(id, title, content) {
     var tab = document.createElement("div");
     tab.className = 'smash-tab active';
     tab.dataset.id = id;
+    tab.dataset.url = url;
     tab.innerHTML = title + '<i class="material-icons close">close</i>';
     tab.onclick = function(e) {
         if (active = smash.get(tabs, '.smash-tab.active')) {
@@ -55,6 +56,9 @@ smash.workspace.addTab = function(id, title, content) {
         smash.class.add(this, 'active');
         smash.hide(document, '.smash-pane');
         smash.show(document, '.smash-pane[data-id="' + this.dataset.id + '"]');
+        if (this.dataset.url) {
+            smash.router.displayURL(this.dataset.url);
+        }
     };
     smash.on(tab, '.close', 'onclick', function(e) {
         if (smash.class.has(this.parentElement, 'active')) {
