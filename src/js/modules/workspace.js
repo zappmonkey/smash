@@ -34,6 +34,7 @@ smash.workspace.addTab = function(id, title, content, url) {
 
     if (tab = smash.get(tabs, '.smash-tab[data-id="' + id + '"]')) {
         var pane = smash.get(panesContainer, '.smash-pane[data-id="' + id + '"]').innerHTML = content;
+        tab.dataset.url = url;
         tab.onclick();
         return;
     }
