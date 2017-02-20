@@ -57,6 +57,7 @@ smash.workspace.addTab = function(id, title, content, url) {
         smash.hide(document, '.smash-pane');
         smash.show(document, '.smash-pane[data-id="' + this.dataset.id + '"]');
         if (this.dataset.url && this.dataset.url != null && this.dataset.url != undefined) {
+            console.log('url', this.dataset.url);
             smash.router.displayURL(this.dataset.url);
         }
     };
