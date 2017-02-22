@@ -97,6 +97,9 @@
                             <div class="smash-input has-floating-label">
                                 <input type="password" name="password" placeholder="Password"/>
                             </div>
+                            <div class="smash-input has-floating-label">
+                                <input type="text" name="email" placeholder="Email" value="I already have a value"/>
+                            </div>
                             <button class="smash-button" disabled="disabled">
                                 disabled
                             </button>
@@ -233,6 +236,7 @@
         smash.searchbox.onchange = function(value) {
             console.log('autocomplete change', value);
         };
+        smash.input.init();
         </script>
     </body>
 </html>

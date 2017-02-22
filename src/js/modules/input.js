@@ -5,6 +5,9 @@ smash.input.init = function() {
     var input;
     for (var i = 0; i < inputs.length; i++) {
         input = inputs[i];
+        if (smash.class.has(input.parentElement, 'smash-initialised')) {
+            continue;
+        }
         smash.class.remove(input.parentElement, 'has-floating-label');
         smash.class.add(input.parentElement, 'floating-label');
 
@@ -14,18 +17,23 @@ smash.input.init = function() {
         input.onkeyup = function(e) {
             var l = this.parentElement.querySelector("label");
             if (l) {
-                if (e.srcElement.value != "") {
+                if (this.value != "") {
                     smash.class.add(l, 'show');
                 } else {
                     smash.class.remove(l, 'show');
                 }
             }
         };
+        input.onkeyup();
+        smash.class.add(input.parentElement, 'smash-initialised');
     }
     var selects = document.querySelectorAll(".smash-select select");
     var select;
     for (var i = 0; i < selects.length; i++) {
         select = selects[i];
+        if (smash.class.has(select.parentElement, 'smash-initialised')) {
+            continue;
+        }
         if (smash.class.has(select.parentElement, 'has-floating-label')) {
             smash.class.remove(select.parentElement, 'has-floating-label');
             smash.class.add(select.parentElement, 'floating-label');
@@ -72,7 +80,6 @@ smash.input.init = function() {
                 }
             }
         };
-
         select.parentElement.onclick = function() {
             smash.class.add(this, 'is-focussed');
             var select = this;
@@ -82,6 +89,6 @@ smash.input.init = function() {
                 smash.class.remove(select, 'is-focussed');
             };
         };
-
+        smash.class.add(select.parentElement, 'smash-initialised');
     }
 };
