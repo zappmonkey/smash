@@ -65,7 +65,9 @@ smash.input.init = function() {
             var select = this.querySelector("select");
             var input = this.querySelector("input");
             select.value = value;
-            input.value = select.options[select.selectedIndex].text;
+            if (select.selectedIndex > -1) {
+                input.value = select.options[select.selectedIndex].text;
+            }
             input.focus();
             input.onfocus();
         };
