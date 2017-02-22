@@ -1,7 +1,7 @@
 smash.input = {};
 
 smash.input.init = function() {
-    var inputs = document.querySelectorAll(".smash-input input");
+    var inputs = document.querySelectorAll(".smash-input input, .smash-textarea textarea");
     var input;
     for (var i = 0; i < inputs.length; i++) {
         input = inputs[i];
@@ -10,14 +10,24 @@ smash.input.init = function() {
         }
 
         input.parentElement.setValue = function(value) {
-            var input = this.querySelector("input");
-            input.value = value;
-            input.onkeyup();
+            if (input = this.querySelector("input")) {
+                input.value = value;
+                input.onkeyup();
+            } else if (input = this.querySelector("textarea")) {
+                input.value = value;
+                input.onkeyup();
+            }
         };
 
         input.parentElement.getValue = function() {
-            var input = this.querySelector("input");
-            return input.value
+            if (input = this.querySelector("input")) {
+                var input = this.querySelector("input");
+                return input.value
+            } else if (input = this.querySelector("textarea")) {
+                var input = this.querySelector("input");
+                return input.value
+            }
+            return null;
         };
 
         if (smash.class.has(input.parentElement, 'has-floating-label')) {

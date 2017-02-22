@@ -311,7 +311,7 @@
     }
 }
 
-.smash-input, .smash-select {
+.smash-input, .smash-textarea, .smash-select {
     margin-top: 18px;
     background: #fff;
     border: 1px solid #aaa;
@@ -319,16 +319,36 @@
     border-radius: 2px;
     position: relative;
     height: 30px;
+    width: 180px;
 
-    input {
+    &.size-3-1 {
+        width: 118px;
+    }
+
+    &.size-3-2 {
+        width: 242px;
+    }
+
+    &.size-2-1 {
+        width: 180px;
+    }
+
+    &.size-2-2, &.size-3-3 {
+        width: 366px;
+    }
+
+    input, textarea {
         font-family: $font;
         font-size: $font-size;
         font-weight: normal;
-        background: 0;
+        background: none;
         border: none;
         line-height: 18px;
         margin: 0;
         padding: 6px 10px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
     }
 
     select {
@@ -355,6 +375,10 @@
             color: rgba(0,0,0,0.3);
         }
     }
+}
+
+.smash-textarea {
+    height: auto;
 }
 
 .smash-select {
