@@ -36,10 +36,11 @@ smash.workspace.addTab = function(id, title, content, url) {
     document.title = title.replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/ig, "") + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "");
 
     if (tab = smash.get(tabs, '.smash-tab[data-id="' + id + '"]')) {
-        var pane = smash.get(panesContainer, '.smash-pane[data-id="' + id + '"]').innerHTML = content;
+        var pane = smash.get(panesContainer, '.smash-pane[data-id="' + id + '"]');
+        pane.innerHTML = content;
         tab.dataset.url = url;
         tab.onclick();
-        return;
+        return {tab: tab, pane: pane};
     }
 
     smash.hide(panesContainer, ".smash-pane");
@@ -86,4 +87,17 @@ smash.workspace.addTab = function(id, title, content, url) {
     pane.dataset.id = id;
     pane.innerHTML = content;
     panesContainer.appendChild(pane);
+    return {tab: tab, pane: pane};
 };
+
+smash.workspace.activeTab = function() {
+    var tab = smash.get(tabs, '.smash-tab.active')
+    if (!tab) {
+        return null;
+    }
+    var pane = smash.get(document, '.smash-pane[data-id="' + tab.dataset.id + '"]');
+    if (!pane) {
+        return null;
+    }
+    return {tab: tab, pane: pane};
+}
