@@ -1,4 +1,5 @@
 smash.workspace = {
+    baseTitle: undefined,
     _ws_: undefined,
     _hdr_: undefined,
     _sb_: undefined,
@@ -31,6 +32,8 @@ smash.workspace.addTab = function(id, title, content, url) {
     }
     var tabs = smash.get(document, '.smash-tab-pane .smash-tabs');
     var panesContainer = smash.get(document, '.smash-tab-pane .smash-panes');
+
+    document.title = title + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "");
 
     if (tab = smash.get(tabs, '.smash-tab[data-id="' + id + '"]')) {
         var pane = smash.get(panesContainer, '.smash-pane[data-id="' + id + '"]').innerHTML = content;
