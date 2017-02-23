@@ -1,11 +1,15 @@
 smash.storage = {};
 
-smash.storage.set = function(name, value) {
-    localStorage.setItem(name, JSON.stringify(value));
+smash.storage.set = function(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
 };
 
-smash.storage.get = function(name) {
-    var i = localStorage.getItem(name);
+smash.storage.unset = function(key) {
+    localStorage.removeItem(key);
+};
+
+smash.storage.get = function(key) {
+    var i = localStorage.getItem(key);
     if (!i) {
         return undefined;
     }
