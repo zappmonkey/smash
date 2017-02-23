@@ -33,7 +33,7 @@ smash.workspace.addTab = function(id, title, content, url) {
     var tabs = smash.get(document, '.smash-tab-pane .smash-tabs');
     var panesContainer = smash.get(document, '.smash-tab-pane .smash-panes');
 
-    document.title = title + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "");
+    document.title = title.replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/ig, "") + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "");
 
     if (tab = smash.get(tabs, '.smash-tab[data-id="' + id + '"]')) {
         var pane = smash.get(panesContainer, '.smash-pane[data-id="' + id + '"]').innerHTML = content;
