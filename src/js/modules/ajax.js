@@ -6,6 +6,10 @@ smash.ajax.addHeader = function(name, value) {
     smash.ajax._headers_[name] = value;
 };
 
+smash.ajax.removeHeader = function(name) {
+    delete smash.ajax._headers_[name];
+};
+
 smash.ajax._xhr_ = function () {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
