@@ -74,9 +74,6 @@ smash.input.init = function() {
             smash.class.remove(this, 'is-focussed');
             var select = this.querySelector("select");
             var input = this.querySelector("input");
-            if (select.value == value) {
-                return;
-            }
             select.value = value;
             if (select.selectedIndex > -1) {
                 input.value = select.options[select.selectedIndex].text;
