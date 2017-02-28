@@ -153,7 +153,9 @@
                             <button class="smash-button">
                                 Submit
                             </button>
-
+                            <button class="smash-button show-dialog">
+                                Show dialog
+                            </button>
                             <table class="clickable">
                                 <thead>
                                     <tr>
@@ -265,6 +267,48 @@
         };
         smash.searchbox.onchange = function(value) {
             console.log('autocomplete change', value);
+        };
+        document.querySelector(".show-dialog").onclick = function() {
+            smash.dialog.new(`<table class="clickable">
+                                            <thead>
+                                                <tr>
+                                                    <th>header 1</th>
+                                                    <th>header 2</th>
+                                                    <th>header 3</th>
+                                                    <th>header 4</th>
+                                                    <th>header 5</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>content 1</td>
+                                                    <td>content 2</td>
+                                                    <td>content 3</td>
+                                                    <td>content 4</td>
+                                                    <td>content 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>content 1</td>
+                                                    <td>content 2</td>
+                                                    <td>content 3</td>
+                                                    <td>content 4</td>
+                                                    <td>content 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>content 1</td>
+                                                    <td>content 2</td>
+                                                    <td>content 3</td>
+                                                    <td>content 4</td>
+                                                    <td>content 5</td>
+                                                </tr>
+                                            </tbody>
+                                        </table><br/>
+                                        <button class="smash-button">
+                                            Submit
+                                        </button>
+                                        <button class="smash-button show-dialog">
+                                            Show dialog
+                                        </button>`);
         };
         smash.input.init();
         </script>
