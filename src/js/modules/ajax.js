@@ -10,6 +10,14 @@ smash.ajax.removeHeader = function(name) {
     delete smash.ajax._headers_[name];
 };
 
+smash.ajax.onerror = function(message) {
+    console.log(message);
+};
+
+smash.ajax.onunauthorized = function(message) {
+    smash.ajax.onerror(message);
+};
+
 smash.ajax._xhr_ = function () {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
@@ -41,11 +49,19 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     x.responseType = responseType;
     x.onreadystatechange = function () {
 		if (x.readyState == 4) {
-			if (x.status == 200 || x.status == 201) {
-				callback && callback(x.response);
-			} else {
-                console.log(x.status, x.response);
-			}
+            switch (x.status) {
+            case 200:
+            case 201:
+                if (callback) {
+                    callback(x.response);
+                }
+                break;
+            case 401:
+                smash.ajax.onunauthorized(x.response);
+                break;
+            default:
+                smash.ajax.onerror(x.response);
+            }
 		}
     };
     x.open(method, url, async);
