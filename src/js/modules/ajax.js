@@ -41,9 +41,12 @@ smash.ajax._xhr_ = function () {
     return xhr;
 };
 
-smash.ajax.send = function (url, callback, method, data, responseType, async) {
+smash.ajax.send = function (url, callback, method, data, responseType, onerror, async) {
     if (async === undefined) {
         async = true;
+    }
+    if (onerror === undefined) {
+        onerror = smash.ajax.onerror;
     }
     var x = smash.ajax._xhr_();
     x.responseType = responseType;
@@ -60,7 +63,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
                 smash.ajax.onunauthorized(x.response);
                 break;
             default:
-                smash.ajax.onerror(x.response);
+                onerror(x.response);
             }
 		}
     };
@@ -76,7 +79,7 @@ smash.ajax.send = function (url, callback, method, data, responseType, async) {
     x.send(data)
 };
 
-smash.ajax.get = function (url, callback, data, responseType, async) {
+smash.ajax.get = function (url, callback, data, responseType, onerror, async) {
     var query = [];
     for (var key in data) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
@@ -84,7 +87,7 @@ smash.ajax.get = function (url, callback, data, responseType, async) {
     smash.ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, responseType,  async)
 };
 
-smash.ajax.post = function (url, callback, data, responseType, async) {
+smash.ajax.post = function (url, callback, data, responseType, onerror, async) {
     var dataStr;
     if (data) {
         if (responseType != 'json') {
