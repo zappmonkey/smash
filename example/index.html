@@ -122,6 +122,13 @@
                                 <input type="text" name="email" placeholder="Suffix" />
                             </div>
                             <br/>
+                            <div class="smash-checkbox">
+                                <input type="checkbox" name="email" label="Checkbox" />
+                            </div>
+                            <div class="smash-checkbox checked">
+                                <input type="checkbox" name="test" label="Checkbox is checked" />
+                            </div>
+                            <br/>
                             <div class="smash-input has-floating-label">
                                 <input type="text" name="adres" placeholder="Adres"/>
                             </div>
@@ -269,7 +276,7 @@
             console.log('autocomplete change', value);
         };
         document.querySelector(".show-dialog").onclick = function() {
-            smash.dialog.new(`<table class="clickable">
+            smash.dialog.new(`<div style="padding: 20px"><table class="clickable">
                                             <thead>
                                                 <tr>
                                                     <th>header 1</th>
@@ -308,7 +315,7 @@
                                         </button>
                                         <button class="smash-button show-dialog">
                                             Show dialog
-                                        </button>`);
+                                        </button></div>`);
         };
         smash.input.init();
         </script>

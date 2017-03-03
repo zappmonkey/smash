@@ -143,4 +143,46 @@ smash.input.init = function() {
         }
         smash.class.add(select.parentElement, 'smash-initialised');
     }
+    smash.input.checkboxInit();
+};
+
+smash.input.checkboxInit = function() {
+    var checkboxes = document.querySelectorAll(".smash-checkbox input");
+    var checkbox;
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkbox = checkboxes[i];
+        if (smash.class.has(checkbox.parentElement, 'smash-initialised')) {
+            continue;
+        }
+
+        var c =  document.createElement('span');
+        c.className = 'checks';
+        c.innerHTML = '<i class="material-icons">check_box_outline_blank</i><i class="material-icons checked">check_box</i>';
+        checkbox.parentElement.appendChild(c);
+
+        if (label = checkbox.getAttribute('label')) {
+            var l = document.createElement('span');
+            l.className = 'label';
+            l.innerHTML = label;
+            checkbox.parentElement.appendChild(l);
+        }
+        smash.class.add(checkbox.parentElement, 'smash-initialised');
+        checkbox.checked = smash.class.has(checkbox.parentElement, 'checked');
+
+        checkbox.parentElement.onclick = function() {
+            smash.class.toggle(this, 'checked');
+            smash.get(this, 'input').checked = smash.class.has(this, 'checked');
+        };
+
+        checkbox.parentElement.getValue = function() {
+            return smash.class.has(this, 'checked');
+        };
+
+        checkbox.parentElement.setValue = function(value) {
+            if (smash.class.has(this, 'checked') == value) {
+                return;
+            }
+            this.onclick();
+        };
+    }
 };
