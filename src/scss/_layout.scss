@@ -187,6 +187,18 @@
         color: $colored-button-color;
         background: $primary-color;
     }
+    &.no-shadow {
+        box-shadow: none;
+    }
+    &.borderless {
+        border-color: rgba(0,0,0,0.0);
+        color: $primary-color;
+        background: none;
+        box-shadow: none;
+        &:hover {
+            background: $light-hover-color;
+        }
+    }
 }
 
 .is-focussed .smash-spacer {
