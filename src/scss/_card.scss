@@ -1,4 +1,74 @@
 .smash-card {
     width: 300px;
     background: #fff;
+    box-shadow: $box-shadow;
+    font-family: $font;
+    font-size: $font-size;
+    display: inline-block;
+}
+
+.smash-row {
+    .smash-card {
+        margin-right: 20px;
+        float: left;
+        &.last {
+            margin-right: 0;
+        }
+    }
+    .smash-clear {
+        clear: both;
+    }
+}
+
+.smash-card-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $font-size + 2px;
+    padding: 15px 10px;
+}
+
+.smash-card-actions {
+    padding: 10px;
+    text-align: right;
+    border-top: 1px solid #ededed;
+    .borderless {
+        border: none;
+    }
+    .smash-button {
+        margin: 0;
+    }
+}
+
+.smash-card-content {
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+            padding: 10px;
+            border-top: 1px solid #ededed;
+            .title {
+                font-weight: bold;
+                display: block;
+            }
+            .content {
+                margin-top: 5px;
+                display: block;
+                color: #666;
+            }
+        }
+        &.clickable {
+            li {
+                cursor: pointer;
+                &:hover {
+                    background: $light-hover-color;
+                }
+            }
+        }
+        &.borderless {
+            li {
+                border: none;
+            }
+        }
+    }
 }
