@@ -172,6 +172,9 @@ smash.input.checkboxInit = function() {
         checkbox.parentElement.onclick = function() {
             smash.class.toggle(this, 'checked');
             smash.get(this, 'input').checked = smash.class.has(this, 'checked');
+            if (checkbox.parentElement.onchange) {
+                checkbox.parentElement.onchange(smash.class.has(this, 'checked'));
+            }
         };
 
         checkbox.parentElement.getValue = function() {
