@@ -84,7 +84,7 @@ smash.ajax.get = function (url, callback, data, responseType, onerror, async) {
     for (var key in data) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
     }
-    smash.ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, responseType,  async)
+    smash.ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, responseType, onerror,  async)
 };
 
 smash.ajax.post = function (url, callback, data, responseType, onerror, async) {
@@ -100,5 +100,5 @@ smash.ajax.post = function (url, callback, data, responseType, onerror, async) {
             dataStr = JSON.stringify(data);
         }
     }
-    smash.ajax.send(url, callback, 'POST', dataStr, responseType, async)
+    smash.ajax.send(url, callback, 'POST', dataStr, responseType, onerror, async)
 };
