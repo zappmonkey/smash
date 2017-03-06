@@ -67,6 +67,9 @@ smash.workspace.addTab = function(id, title, content, url) {
         document.title = smash.workspace.createTitle(this.innerHTML);
     };
     smash.on(tab, '.close', 'onclick', function(e) {
+        if (this.parentElement.onclose && !this.parentElement.onclose()) {
+            return;
+        }
         if (smash.class.has(this.parentElement, 'active')) {
             if (this.parentElement.previousSibling) {
                 this.parentElement.previousSibling.onclick();
