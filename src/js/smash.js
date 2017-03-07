@@ -50,3 +50,11 @@ smash.on = function(parent, selector, event, callback) {
         elements[i][event] = callback;
     }
 };
+
+smash.fuzzyCompare = function(search, compare) {
+    if (compare == undefined || search == undefined) {
+        return false;
+    }
+    var regex = ".*?" + search.toLowerCase().split("").join(".*?") + ".*?";
+    return compare.toLowerCase().match(regex);
+};

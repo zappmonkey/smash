@@ -131,11 +131,52 @@ smash.input.init = function() {
         select.parentElement.onclick = function() {
             smash.class.add(this, 'is-focussed');
             var select = this;
+            var q = '';
             window.onmousedown = function() {
-                console.log("click outside");
                 window.onmousedown = null;
+                window.onkeyup = null;
+                if (items = smash.getAll(select, 'ul li')) {
+                    for (var i=0; i<items.length; i++) {
+                        items[i].style.display = "";
+                    }
+                    smash.show(select, 'ul');
+                }
                 smash.class.remove(select, 'is-focussed');
             };
+            window.onkeyup = function(e) {
+                switch (e.keyCode) {
+                case 8:
+                    if (q.length > 0) {
+                        q = q.substring(0, q.length-1);
+                    }
+                    break;
+                case 27:
+                    q = "";
+                    break;
+                default:
+                    q += String.fromCharCode(e.keyCode);
+                }
+                if (items = smash.getAll(select, 'ul li')) {
+                    smash.show(select, 'ul');
+                    var item;
+                    var results = false;
+                    for (var i=0; i<items.length; i++) {
+                        item = items[i];
+                        console.log(item.innerHTML);
+                        console.log(q);
+                        if (smash.fuzzyCompare(q, item.innerHTML)) {
+                            item.style.display = "";
+                            results = true;
+                        } else {
+                            item.style.display = "none";
+                        }
+                    }
+                    if (!results) {
+                        smash.hide(select, 'ul');
+                    }
+                }
+            };
+            window.focus();
         };
 
         if (select.parentElement.getAttribute('value')) {
