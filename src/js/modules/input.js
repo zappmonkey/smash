@@ -114,7 +114,7 @@ smash.input.init = function() {
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
                 e.stopPropagation();
-                window.onmousedown = null;
+                window.onmousedown();
             }
         }
         select.parentElement.appendChild(ul);
@@ -162,8 +162,6 @@ smash.input.init = function() {
                     var results = false;
                     for (var i=0; i<items.length; i++) {
                         item = items[i];
-                        console.log(item.innerHTML);
-                        console.log(q);
                         if (smash.fuzzyCompare(q, item.innerHTML)) {
                             item.style.display = "";
                             results = true;
