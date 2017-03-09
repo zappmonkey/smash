@@ -94,6 +94,14 @@ smash.input.init = function() {
             return select.options[select.selectedIndex].value;
         };
 
+        select.parentElement.getText = function() {
+            var select = this.querySelector("select");
+            if (select.selectedIndex == -1) {
+                return null;
+            }
+            return select.options[select.selectedIndex].innerHTML;
+        };
+
         var input = document.createElement('input');
         input.type = "text";
         input.placeholder = select.getAttribute('placeholder');
