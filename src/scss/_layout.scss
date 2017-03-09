@@ -417,6 +417,8 @@
         margin: 0;
         display: none;
         z-index: 2;
+        max-height: 200px;
+        overflow-y: scroll;
 
         li {
             font-family: $font;

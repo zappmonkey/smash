@@ -24,7 +24,7 @@ smash.input.init = function() {
                 var input = this.querySelector("input");
                 return input.value
             } else if (input = this.querySelector("textarea")) {
-                var input = this.querySelector("input");
+                var input = this.querySelector("textarea");
                 return input.value
             }
             return null;
