@@ -31,14 +31,24 @@ smash.getAll = function(parent, selector) {
 };
 
 smash.hide = function(parent, selector) {
-    var el = smash.getAll(parent, selector);
+    var el;
+    if (typeof parent === 'string' && typeof selector === 'string') {
+        el = smash.getAll(parent, selector);
+    } else {
+        el = parent;
+    }
     for (var i=0; i<el.length; i++) {
         el[i].style.display = 'none';
     }
 };
 
 smash.show = function(parent, selector) {
-    var el = smash.getAll(parent, selector);
+    var el;
+    if (typeof parent === 'string' && typeof selector === 'string') {
+        el = smash.getAll(parent, selector);
+    } else {
+        el = parent;
+    }
     for (var i=0; i<el.length; i++) {
         el[i].style.display = '';
     }
