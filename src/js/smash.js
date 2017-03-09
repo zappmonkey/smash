@@ -32,7 +32,7 @@ smash.getAll = function(parent, selector) {
 
 smash.hide = function(parent, selector) {
     var el;
-    if (typeof parent === 'string' && typeof selector === 'string') {
+    if (selector && typeof selector === 'string') {
         el = smash.getAll(parent, selector);
     } else {
         el = [parent];
@@ -44,7 +44,7 @@ smash.hide = function(parent, selector) {
 
 smash.show = function(parent, selector) {
     var el;
-    if (typeof parent === 'string' && typeof selector === 'string') {
+    if (selector && typeof selector === 'string') {
         el = smash.getAll(parent, selector);
     } else {
         el = [parent];

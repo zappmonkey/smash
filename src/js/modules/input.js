@@ -78,6 +78,8 @@ smash.input.init = function() {
             select.value = value;
             if (select.selectedIndex > -1) {
                 input.value = select.options[select.selectedIndex].text;
+            } else {
+                input.value = "";
             }
             input.focus();
             input.onfocus();
