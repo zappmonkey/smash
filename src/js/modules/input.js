@@ -96,6 +96,10 @@ smash.input.init = function() {
             return select.options[select.selectedIndex].value;
         };
 
+        select.parentElement.reset = function() {
+            smash.get(this, 'input').value = this.getText();
+        };
+
         select.parentElement.getText = function() {
             var select = this.querySelector("select");
             if (select.selectedIndex == -1) {
@@ -139,12 +143,14 @@ smash.input.init = function() {
             }
         };
         select.parentElement.onclick = function() {
-            smash.class.add(this, 'is-focussed');
+            var input = smash.get(this, 'input');
             var select = this;
+            smash.class.add(this, 'is-focussed');
             var q = '';
             window.onmousedown = function() {
                 window.onmousedown = null;
                 window.onkeyup = null;
+                select.reset();
                 if (items = smash.getAll(select, 'ul li')) {
                     for (var i=0; i<items.length; i++) {
                         items[i].style.display = "";
@@ -154,6 +160,7 @@ smash.input.init = function() {
                 smash.class.remove(select, 'is-focussed');
             };
             window.onkeyup = function(e) {
+                console.log(e.keyCode, String.fromCharCode(e.which));
                 switch (e.keyCode) {
                 case 8:
                     if (q.length > 0) {
@@ -163,8 +170,25 @@ smash.input.init = function() {
                 case 27:
                     q = "";
                     break;
+                case 189:
+                    q += "-";
+                    break;
+                case 190:
+                    q += ".";
+                    break;
+                case 191:
+                    q += "/";
+                    break;
+                case 220:
+                    q += "\\";
+                    break;
                 default:
                     q += String.fromCharCode(e.keyCode);
+                }
+                if (q != "") {
+                    input.value = q.toLowerCase();
+                } else {
+                    select.reset();
                 }
                 if (items = smash.getAll(select, 'ul li')) {
                     smash.show(select, 'ul');
@@ -172,7 +196,7 @@ smash.input.init = function() {
                     var results = false;
                     for (var i=0; i<items.length; i++) {
                         item = items[i];
-                        if (smash.fuzzyCompare(q, item.innerHTML)) {
+                        if (q == "" || smash.fuzzyCompare(q, item.innerHTML)) {
                             item.style.display = "";
                             results = true;
                         } else {

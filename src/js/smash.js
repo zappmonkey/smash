@@ -65,6 +65,6 @@ smash.fuzzyCompare = function(search, compare) {
     if (compare == undefined || search == undefined) {
         return false;
     }
-    var regex = ".*?" + search.toLowerCase().split("").join(".*?") + ".*?";
+    var regex = ".*?" + search.toLowerCase().replace(/-/g, "\\-").split("").join(".*?") + ".*?";
     return compare.toLowerCase().match(regex);
 };
