@@ -4,6 +4,23 @@
     -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font;
+    color: #333;
+}
+
+h1 {
+    color: $primary-color;
+    font-size: 26px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h5, h6 {
+    text-transform: uppercase;
+}
 .smash-container {
     background: $background-color;
     position: absolute;
@@ -124,6 +141,7 @@
         font-family: $font;
         font-size: 14px;
         text-transform: uppercase;
+        color: #fff;
         font-weight: normal;
         margin: 0;
     }
