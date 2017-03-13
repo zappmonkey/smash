@@ -1,4 +1,5 @@
 .smash-card {
+    text-align:left;
     width: 300px;
     background: #fff;
     box-shadow: $box-shadow;
@@ -8,9 +9,11 @@
 }
 
 .smash-row {
+    text-align:center;
+
     .smash-card {
         margin-right: 20px;
-        float: left;
+        vertical-align: top;
         &.last {
             margin-right: 0;
         }
