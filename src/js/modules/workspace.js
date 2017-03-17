@@ -107,5 +107,16 @@ smash.workspace.activeTab = function() {
 };
 
 smash.workspace.createTitle = function(title) {
-    return title.replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/ig, "") + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "")
+    var t = title.replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/ig, "");
+    if (t == '') {
+        var div = document.createElement("div");
+        div.innerHTML = title;
+        if (ts = smash.get(div, '.title')) {
+            t = ts.innerHTML;
+        }
+        if (t == '') {
+            t = 'unknown';
+        }
+    }
+    return t + (smash.workspace.baseTitle ? ' | ' + smash.workspace.baseTitle : "");
 };
