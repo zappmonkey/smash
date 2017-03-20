@@ -116,6 +116,9 @@ smash.input.init = function() {
 
         var options = select.querySelectorAll("option");
         var ul = document.createElement('ul');
+        ul.onmouseup = function(e) {
+            e.stopPropagation();
+        };
         for (var j = 0; j < options.length; j++) {
             var option = options[j];
             if (!option.getAttribute('value')) {
@@ -128,7 +131,7 @@ smash.input.init = function() {
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
                 e.stopPropagation();
-                window.onmousedown();
+                window.onmouseup();
             }
         }
         select.parentElement.appendChild(ul);
@@ -147,8 +150,8 @@ smash.input.init = function() {
             var select = this;
             smash.class.add(this, 'is-focussed');
             var q = '';
-            window.onmousedown = function() {
-                window.onmousedown = null;
+            window.onmouseup = function() {
+                window.onmouseup = null;
                 window.onkeyup = null;
                 select.reset();
                 if (items = smash.getAll(select, 'ul li')) {
@@ -160,7 +163,7 @@ smash.input.init = function() {
                 smash.class.remove(select, 'is-focussed');
             };
             window.onkeyup = function(e) {
-                console.log(e.keyCode, String.fromCharCode(e.which));
+                // console.log(e.keyCode, String.fromCharCode(e.which));
                 switch (e.keyCode) {
                 case 8:
                     if (q.length > 0) {
