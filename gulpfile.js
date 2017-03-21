@@ -10,7 +10,7 @@ function js_dev() {
 	return gulp.src(['./src/js/smash.js', './src/js/modules/**/*.js'])
 		.pipe(sourcemaps.init())
 		.pipe(concat('smash.js'))
-		.pipe(uglify())
+		.pipe(uglify().on('error', function(e) { console.log(e); return this.end(); }))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./example/js'));
 }
