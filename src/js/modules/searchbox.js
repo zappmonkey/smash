@@ -53,7 +53,7 @@ smash.searchbox.appendTo = function(content) {
     var node = document.createElement("div");
     node.innerHTML = content;
     var results = document.querySelector(".smash-searchbox .smash-searchbox-results");
-    results.parentElement.appendChild(node);
+    results.appendChild(node);
 };
 
 smash.searchbox.results = function(content) {
