@@ -3,7 +3,7 @@ smash.searchbox = {
     minAutoCompleteLength: 3,
     onfocus: undefined,
     onblur: undefined,
-    onvalue: undefined,
+    onchange: undefined,
 };
 
 smash.searchbox.init = function() {
@@ -40,6 +40,20 @@ smash.searchbox.init = function() {
         }
     };
     smash.searchbox.i_ = true;
+};
+
+smash.searchbox.empty = function() {
+    if (i = smash.get(document, ".smash-searchbox input")) {
+        return (i.value.length == 0);
+    }
+    return true;
+}
+
+smash.searchbox.appendTo = function(content) {
+    var node = document.createElement("div");
+    node.innerHTML = content;
+    var results = document.querySelector(".smash-searchbox .smash-searchbox-results");
+    results.parentElement.appendChild(node);
 };
 
 smash.searchbox.results = function(content) {
