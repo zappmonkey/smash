@@ -32,12 +32,14 @@ smash.searchbox.init = function() {
         }
     };
     ssb.onkeyup = function(e) {
-        if (this.value.length < smash.searchbox.minAutoCompleteLength) {
-            return;
-        }
         switch (e.keyCode) {
         case 27:
-            this.value = "";
+            this.value = '';
+            smash.searchbox.onchange(this.value);
+            return;
+        }
+        if (this.value.length < smash.searchbox.minAutoCompleteLength) {
+            return;
         }
         if (smash.searchbox.onchange) {
             smash.searchbox.onchange(this.value);
