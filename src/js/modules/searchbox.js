@@ -35,6 +35,10 @@ smash.searchbox.init = function() {
         if (this.value.length < smash.searchbox.minAutoCompleteLength) {
             return;
         }
+        switch (e.keyCode) {
+        case 27:
+            this.value = "";
+        }
         if (smash.searchbox.onchange) {
             smash.searchbox.onchange(this.value);
         }
