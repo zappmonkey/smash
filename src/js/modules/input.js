@@ -91,8 +91,13 @@ smash.input.init = function() {
             }
             input.focus();
             input.onfocus();
-            if (old != value && select.onchange) {
-                select.onchange();
+            if (old != value) {
+                if (select.onchange) {
+                    select.onchange();
+                }
+                if (this.onchange) {
+                    this.onchange();
+                }
             }
         };
 
