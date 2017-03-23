@@ -10,7 +10,7 @@ smash.input.init = function() {
         }
 
         input.parentElement.getName = function() {
-            return this.getAttribute('name');
+            return this.querySelector("input").getAttribute('name');
         };
 
         input.parentElement.setValue = function(value) {
@@ -75,7 +75,7 @@ smash.input.init = function() {
         }
 
         select.parentElement.getName = function() {
-            return this.getAttribute('name');
+            return this.querySelector("select").getAttribute('name');
         };
 
         select.parentElement.setValue = function(value) {
@@ -263,7 +263,7 @@ smash.input.checkboxInit = function() {
         };
 
         checkbox.parentElement.getName = function() {
-            return this.getAttribute('name');
+            return this.querySelector("input").getAttribute('name');
         };
 
         checkbox.parentElement.getValue = function() {
