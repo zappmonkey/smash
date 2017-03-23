@@ -9,6 +9,10 @@ smash.input.init = function() {
             continue;
         }
 
+        input.parentElement.getName = function() {
+            return this.getAttribute('name');
+        };
+
         input.parentElement.setValue = function(value) {
             if (input = this.querySelector("input")) {
                 input.value = value;
@@ -69,6 +73,10 @@ smash.input.init = function() {
             label.innerHTML = select.getAttribute('placeholder');
             select.parentElement.appendChild(label);
         }
+
+        select.parentElement.getName = function() {
+            return this.getAttribute('name');
+        };
 
         select.parentElement.setValue = function(value) {
             smash.class.remove(this, 'is-focussed');
@@ -145,6 +153,7 @@ smash.input.init = function() {
                 }
             }
         };
+
         select.parentElement.onclick = function() {
             var input = smash.get(this, 'input');
             var select = this;
@@ -251,6 +260,10 @@ smash.input.checkboxInit = function() {
             if (checkbox.parentElement.onchange) {
                 checkbox.parentElement.onchange(smash.class.has(this, 'checked'));
             }
+        };
+
+        checkbox.parentElement.getName = function() {
+            return this.getAttribute('name');
         };
 
         checkbox.parentElement.getValue = function() {
