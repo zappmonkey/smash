@@ -54,6 +54,10 @@ smash.show = function(parent, selector) {
     }
 };
 
+smash.remove = function(el) {
+    el.parentNode.removeChild(el);
+};
+
 smash.on = function(parent, selector, event, callback) {
     var elements = smash.getAll(parent, selector);
     for (var i=0; i<elements.length; i++) {

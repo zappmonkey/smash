@@ -429,6 +429,22 @@
             var tabs = smash.getAll(document, '.smash-tabs .smash-tab');
             smash.workspace.addTab("test-" + (tabs.length+1), "Test file " + (tabs.length+1), "<div>Test content " + (tabs.length+1) + "</div>");
         };
+        document.oncontextmenu = function(e) {
+            smash.contextmenu.new(e, [
+                {label: "item 1", callback: function(e) {e.stopPropagation(); alert('item 1');}},
+                {label: "item 2", callback: function(e) {e.stopPropagation(); alert('item 2');}},
+                "seperator",
+                {label: "Second item 1", callback: function(e) {e.stopPropagation(); alert('item 1');}},
+                {label: "Third item 2", callback: function(e) {e.stopPropagation(); alert('item 2');}},
+                "seperator",
+                {label: "item 3", callback: function(e) {e.stopPropagation(); alert('item 3');}},
+                {label: "pfhlemdner", callback: function(e) {e.stopPropagation(); alert('item 4');}},
+                {label: "Preview", callback: function(e) {e.stopPropagation(); alert('item 5');}}
+            ]);
+        };
+        smash.on(document, ".smash-checkbox", "onchange", function(e) {
+            console.log(this.getName());
+        });
         smash.searchbox.onfocus = function() {
             console.log('autocomplete focus');
         };
