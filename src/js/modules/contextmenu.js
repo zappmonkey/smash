@@ -37,7 +37,7 @@ smash.contextmenu.new = function(e, items) {
     ctx.style.left = e.pageX;
     ctx.style.zindex = 100;
     e.preventDefault();
-    document.click = smash.contextmenu.close;
+    document.onclick = smash.contextmenu.close;
     return false;
 };
 
@@ -46,5 +46,5 @@ smash.contextmenu.close = function(e) {
     if (ctx = smash.get(document, "#smash-context-menu")) {
         smash.remove(ctx);
     }
-    document.click = undefined;
+    document.onclick = undefined;
 };
