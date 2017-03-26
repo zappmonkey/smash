@@ -81,6 +81,9 @@ smash.workspace.addTab = function(id, title, content, url) {
             pane.parentElement.removeChild(pane);
         }
         this.parentElement.parentElement.removeChild(this.parentElement);
+        if (this.parentElement.onclosed) {
+            this.parentElement.onclosed();
+        }
         e.stopPropagation();
     });
     tabs.appendChild(tab);
