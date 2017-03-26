@@ -272,12 +272,14 @@ h5, h6 {
         box-shadow: 0 0 5px rgba(0,0,0,0.3);
         border-right: 1px solid #bbb;
     }
+
     i {
         width: 40px;
         line-height: 38px;
         text-align: center;
-        color: $icon-color;
+        color: $sidebar-color;
         font-size: 20px;
+        transition: all 0.3s;
 
         &.fa {
             font-size: 16px;
@@ -290,6 +292,7 @@ h5, h6 {
                 content: "\E898";
             }
             &:hover {
+                color: $primary-color;
                 &::before {
                     content: "\E899";
                 }
@@ -300,6 +303,7 @@ h5, h6 {
                 content: "\E899";
             }
             &:hover {
+                color: $primary-color;
                 &::before {
                     content: "\E898";
                 }
@@ -314,6 +318,11 @@ h5, h6 {
             cursor: pointer;
             &:hover {
                 background: $light-hover-color;
+                color: $primary-color;
+                text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+                i {
+                    color: #1a1a1a;
+                }
             }
             span {
                 font-family: $font;
