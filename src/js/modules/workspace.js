@@ -98,7 +98,7 @@ smash.workspace.addTab = function(id, title, content, url) {
 };
 
 smash.workspace.activeTab = function() {
-    var tab = smash.get(tabs, '.smash-tab.active')
+    var tab = smash.get(document, '.smash-tab.active')
     if (!tab) {
         return null;
     }
