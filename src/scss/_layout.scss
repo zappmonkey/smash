@@ -460,6 +460,10 @@ h5, h6 {
                 color: #333;
                 background: $light-hover-color;
             }
+            &.selected {
+                color: #fff;
+                background: #1a1a1a;
+            }
         }
     }
 

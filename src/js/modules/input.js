@@ -90,7 +90,7 @@ smash.input.init = function() {
                 input.value = "";
             }
             input.focus();
-            input.onfocus();
+            input.blur();
             if (old != value) {
                 if (select.onchange) {
                     select.onchange();
@@ -144,11 +144,16 @@ smash.input.init = function() {
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
                 e.stopPropagation();
-                window.onmouseup();
+                if (window.onmouseup) {
+                    window.onmouseup();
+                }
             }
         }
         select.parentElement.appendChild(ul);
         input.onfocus = function(e) {
+            if (smash.class.has(this.parentElement, 'is-focussed')) {
+                return;
+            }
             var l = this.parentElement.querySelector("label");
             if (l) {
                 if (this.value != "") {
@@ -157,16 +162,27 @@ smash.input.init = function() {
                     smash.class.remove(l, 'show');
                 }
             }
+            this.parentElement.click();
         };
 
+        input.onblur = function(e) {
+            if (window.onmouseup) {
+                window.onmouseup();
+            }
+        }
+
         select.parentElement.onclick = function() {
+            smash.class.add(this, 'is-focussed');
             var input = smash.get(this, 'input');
             var select = this;
-            smash.class.add(this, 'is-focussed');
-            var q = '';
+            input.setAttribute("placeholder", input.value);
+            input.removeAttribute("readonly");
+            input.blur();
+            input.value = "";
             window.onmouseup = function() {
                 window.onmouseup = null;
-                window.onkeyup = null;
+                input.onkeyup = null;
+                input.setAttribute("readonly", "readonly");
                 select.reset();
                 if (items = smash.getAll(select, 'ul li')) {
                     for (var i=0; i<items.length; i++) {
@@ -175,38 +191,66 @@ smash.input.init = function() {
                     smash.show(select, 'ul');
                 }
                 smash.class.remove(select, 'is-focussed');
+                return false;
             };
-            window.onkeyup = function(e) {
-                // console.log(e.keyCode, String.fromCharCode(e.which));
+            input.onkeyup = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 switch (e.keyCode) {
-                case 8:
-                    if (q.length > 0) {
-                        q = q.substring(0, q.length-1);
+                case 13:
+                    if (selected = smash.get(select, 'ul li.selected')) {
+                        selected.onmousedown(e);
+                    }
+                    break;
+                case 37:
+                case 38:
+                    if (selected = smash.get(select, 'ul li.selected')) {
+                        smash.class.remove(selected, "selected");
+                        if (previous = smash.previousVisible(selected)) {
+                            smash.class.add(previous, "selected");
+                            previous.parentElement.scrollTop = previous.parentElement.scrollTop - previous.offsetHeight;
+                        } else {
+                            if (last = smash.lastVisible(selected)) {
+                                smash.class.add(last, "selected");
+                                last.parentElement.scrollTop = last.parentElement.scrollHeight;
+                            }
+                        }
+                    } else {
+                        var li = smash.get(select, 'ul li');
+                        if (last = smash.lastVisible(li)) {
+                            smash.class.add(last, "selected");
+                            last.parentElement.scrollTop = last.parentElement.scrollHeight;
+                        }
+                    }
+                    break;
+                case 39:
+                case 40:
+                    if (selected = smash.get(select, 'ul li.selected')) {
+                        smash.class.remove(selected, "selected");
+                        if (next = smash.nextVisible(selected)) {
+                            smash.class.add(next, "selected");
+                            next.parentElement.scrollTop = next.parentElement.scrollTop + next.offsetHeight;
+                        } else {
+                            if (next = smash.firstVisible(selected)) {
+                                smash.class.add(next, "selected");
+                                next.parentElement.scrollTop = 0;
+                            }
+                        }
+                    } else {
+                        var li = smash.get(select, 'ul li');
+                        if (next = smash.firstVisible(li)) {
+                            smash.class.add(next, "selected");
+                            next.parentElement.scrollTop = 0;
+                        }
                     }
                     break;
                 case 27:
-                    q = "";
+                    this.value = "";
+                    this.blur();
+                    this.focus();
                     break;
-                case 189:
-                    q += "-";
-                    break;
-                case 190:
-                    q += ".";
-                    break;
-                case 191:
-                    q += "/";
-                    break;
-                case 220:
-                    q += "\\";
-                    break;
-                default:
-                    q += String.fromCharCode(e.keyCode);
                 }
-                if (q != "") {
-                    input.value = q.toLowerCase();
-                } else {
-                    select.reset();
-                }
+                var q = this.value.replace(/[^a-zA-Z0-9_ ]/g, "");
                 if (items = smash.getAll(select, 'ul li')) {
                     smash.show(select, 'ul');
                     var item;
@@ -224,8 +268,9 @@ smash.input.init = function() {
                         smash.hide(select, 'ul');
                     }
                 }
+                return false;
             };
-            window.focus();
+            input.focus();
         };
 
         if (select.parentElement.getAttribute('value')) {

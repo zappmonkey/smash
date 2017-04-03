@@ -42,6 +42,54 @@ smash.hide = function(parent, selector) {
     }
 };
 
+smash.nextVisible = function(el) {
+    while (el = el.nextSibling) {
+        if (el.style.display == 'none') {
+            continue;
+        }
+        return el;
+    }
+    return undefined;
+};
+
+smash.firstVisible = function(el) {
+    el = el.parentElement.firstChild;
+    if (el.style.display != 'none') {
+        return el;
+    }
+    while (el = el.nextSibling) {
+        if (el.style.display == 'none') {
+            continue;
+        }
+        return el;
+    }
+    return undefined;
+};
+
+smash.previousVisible = function(el) {
+    while (el = el.previousSibling) {
+        if (el.style.display == 'none') {
+            continue;
+        }
+        return el;
+    }
+    return undefined;
+};
+
+smash.lastVisible = function(el) {
+    el = el.parentElement.lastChild;
+    if (el.style.display != 'none') {
+        return el;
+    }
+    while (el = el.previousSibling) {
+        if (el.style.display == 'none') {
+            continue;
+        }
+        return el;
+    }
+    return undefined;
+};
+
 smash.show = function(parent, selector) {
     var el;
     if (selector && typeof selector === 'string') {
