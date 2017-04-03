@@ -111,6 +111,9 @@ smash.input.init = function() {
 
         select.parentElement.reset = function() {
             smash.get(this, 'input').value = this.getText();
+            if (selected = smash.get(this, 'ul li.selected')) {
+                smash.class.remove(selected, 'selected');
+            }
         };
 
         select.parentElement.getText = function() {
