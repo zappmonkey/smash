@@ -217,6 +217,7 @@ smash.input.init = function() {
         select.parentElement.onclick = function() {
             smash.class.add(this, 'is-focussed');
             var input = smash.get(this, 'input');
+            var select = smash.get(this, 'select');
             var smash_select = this;
             if (input.value && input.value != "") {
                 input.setAttribute("placeholder", input.value);
