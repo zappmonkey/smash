@@ -121,6 +121,7 @@ smash.input.init = function() {
                 if (this.onchange) {
                     this.onchange();
                 }
+                this.checkLabel();
             }
         };
 
