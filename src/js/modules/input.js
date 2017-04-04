@@ -190,8 +190,9 @@ smash.input.init = function() {
             ul.appendChild(li);
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
-                var next = smash.findNextTabStop(this.parentElement.parentElement.parentElement, this.parentElement.parentElement);
-                next.focus();
+                if (next = smash.findNextTabStop(this.parentElement.parentElement.parentElement, this.parentElement.parentElement)) {
+                    next.focus();
+                }
                 e.stopPropagation();
                 e.preventDefault();
                 if (window.onmouseup) {
