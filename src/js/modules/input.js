@@ -85,9 +85,16 @@ smash.input.init = function() {
             var old = select.value;
             select.value = value;
             if (select.selectedIndex > -1) {
-                input.value = select.options[select.selectedIndex].text;
+                var text = select.options[select.selectedIndex].text;
+                if (text && text != "") {
+                    input.value = text;
+                } else {
+                    input.value = "";
+                    input.placeholder = select.getAttribute('placeholder');
+                }
             } else {
                 input.value = "";
+                input.placeholder = select.getAttribute('placeholder');
             }
             input.focus();
             input.blur();
@@ -95,8 +102,10 @@ smash.input.init = function() {
                 if (selected = smash.get(this.parentElement, '.selected')) {
                     smash.class.remove(selected, 'selected');
                 }
-                if (selected = smash.get(this, 'li[value="' + value + '"]')) {
-                    smash.class.add(selected, 'selected');
+                if (value != '') {
+                    if (selected = smash.get(this, 'li[value="' + value + '"]')) {
+                        smash.class.add(selected, 'selected');
+                    }
                 }
                 if (select.onchange) {
                     select.onchange();
@@ -117,8 +126,21 @@ smash.input.init = function() {
 
         select.parentElement.reset = function() {
             smash.get(this, 'input').value = this.getText();
+            this.checkLabel();
+            smash.get(this, 'input').blur();
             if (hover = smash.get(this, 'ul li.hover')) {
                 smash.class.remove(hover, 'hover');
+            }
+        };
+
+        select.parentElement.checkLabel = function() {
+            var l = this.querySelector("label");
+            if (l) {
+                if (this.getValue() && this.getValue() != "") {
+                    smash.class.add(l, 'show');
+                } else {
+                    smash.class.remove(l, 'show');
+                }
             }
         };
 
@@ -138,17 +160,19 @@ smash.input.init = function() {
 
         var options = select.querySelectorAll("option");
         var ul = document.createElement('ul');
+        var val;
         ul.onmouseup = function(e) {
             e.stopPropagation();
         };
         for (var j = 0; j < options.length; j++) {
             var option = options[j];
-            if (!option.getAttribute('value')) {
+            val = option.getAttribute('value');
+            if (!val && val !== '') {
                 continue;
             }
             var li = document.createElement('li');
             li.setAttribute("value", option.value);
-            li.innerHTML = option.innerHTML;
+            li.innerHTML = option.innerHTML == "" ? '&nbsp;' : option.innerHTML;
             ul.appendChild(li);
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
@@ -163,14 +187,7 @@ smash.input.init = function() {
             if (smash.class.has(this.parentElement, 'is-focussed')) {
                 return;
             }
-            var l = this.parentElement.querySelector("label");
-            if (l) {
-                if (this.value != "") {
-                    smash.class.add(l, 'show');
-                } else {
-                    smash.class.remove(l, 'show');
-                }
-            }
+            this.parentElement.checkLabel();
             this.parentElement.click();
         };
 
@@ -183,8 +200,12 @@ smash.input.init = function() {
         select.parentElement.onclick = function() {
             smash.class.add(this, 'is-focussed');
             var input = smash.get(this, 'input');
-            var select = this;
-            input.setAttribute("placeholder", input.value);
+            var smash_select = this;
+            if (input.value && input.value != "") {
+                input.setAttribute("placeholder", input.value);
+            } else {
+                input.setAttribute("placeholder", select.getAttribute("placeholder"));
+            }
             input.removeAttribute("readonly");
             input.blur();
             input.value = "";
@@ -192,28 +213,27 @@ smash.input.init = function() {
                 window.onmouseup = null;
                 input.onkeyup = null;
                 input.setAttribute("readonly", "readonly");
-                select.reset();
-                if (items = smash.getAll(select, 'ul li')) {
+                smash_select.reset();
+                if (items = smash.getAll(smash_select, 'ul li')) {
                     for (var i=0; i<items.length; i++) {
                         items[i].style.display = "";
                     }
-                    smash.show(select, 'ul');
+                    smash.show(smash_select, 'ul');
                 }
-                smash.class.remove(select, 'is-focussed');
+                smash.class.remove(smash_select, 'is-focussed');
                 return false;
             };
             input.onkeyup = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 switch (e.keyCode) {
-                case 13:
-                    if (hover = smash.get(select, 'ul li.hover')) {
+                case 39:
+                    if (hover = smash.get(smash_select, 'ul li.hover')) {
                         hover.onmousedown(e);
                     }
                     break;
-                case 37:
                 case 38:
-                    if (hover = smash.get(select, 'ul li.hover')) {
+                    if (hover = smash.get(smash_select, 'ul li.hover')) {
                         smash.class.remove(hover, "hover");
                         if (previous = smash.previousVisible(hover)) {
                             smash.class.add(previous, "hover");
@@ -225,16 +245,15 @@ smash.input.init = function() {
                             }
                         }
                     } else {
-                        var li = smash.get(select, 'ul li');
+                        var li = smash.get(smash_select, 'ul li');
                         if (last = smash.lastVisible(li)) {
                             smash.class.add(last, "hover");
                             last.parentElement.scrollTop = last.parentElement.scrollHeight;
                         }
                     }
                     break;
-                case 39:
                 case 40:
-                    if (hover = smash.get(select, 'ul li.hover')) {
+                    if (hover = smash.get(smash_select, 'ul li.hover')) {
                         smash.class.remove(hover, "hover");
                         if (next = smash.nextVisible(hover)) {
                             smash.class.add(next, "hover");
@@ -246,7 +265,7 @@ smash.input.init = function() {
                             }
                         }
                     } else {
-                        var li = smash.get(select, 'ul li');
+                        var li = smash.get(smash_select, 'ul li');
                         if (next = smash.firstVisible(li)) {
                             smash.class.add(next, "hover");
                             next.parentElement.scrollTop = 0;
@@ -260,8 +279,8 @@ smash.input.init = function() {
                     break;
                 }
                 var q = this.value.replace(/[^a-zA-Z0-9_ ]/g, "");
-                if (items = smash.getAll(select, 'ul li')) {
-                    smash.show(select, 'ul');
+                if (items = smash.getAll(smash_select, 'ul li')) {
+                    smash.show(smash_select, 'ul');
                     var item;
                     var results = false;
                     for (var i=0; i<items.length; i++) {
@@ -274,7 +293,7 @@ smash.input.init = function() {
                         }
                     }
                     if (!results) {
-                        smash.hide(select, 'ul');
+                        smash.hide(smash_select, 'ul');
                     }
                 }
                 return false;
