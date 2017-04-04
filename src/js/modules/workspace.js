@@ -1,5 +1,6 @@
 smash.workspace = {
     baseTitle: undefined,
+    onlasttabclosed: undefined,
     _ws_: undefined,
     _hdr_: undefined,
     _sb_: undefined,
@@ -83,6 +84,9 @@ smash.workspace.addTab = function(id, title, content, url) {
         this.parentElement.parentElement.removeChild(this.parentElement);
         if (this.parentElement.onclosed) {
             this.parentElement.onclosed();
+        }
+        if (!smash.workspace.activeTab() && smash.workspace.onlasttabclosed) {
+            smash.workspace.onlasttabclosed();
         }
         e.stopPropagation();
     });
