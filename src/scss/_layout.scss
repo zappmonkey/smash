@@ -456,13 +456,13 @@ h5, h6 {
             color: #999;
             cursor: pointer;
 
-            &:hover {
+            &:hover, &.hover {
                 color: #333;
                 background: $light-hover-color;
             }
             &.selected {
                 color: #fff;
-                background: #1a1a1a;
+                background: $primary-color;
             }
         }
     }

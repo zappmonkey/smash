@@ -92,6 +92,12 @@ smash.input.init = function() {
             input.focus();
             input.blur();
             if (old != value) {
+                if (selected = smash.get(this.parentElement, '.selected')) {
+                    smash.class.remove(selected, 'selected');
+                }
+                if (selected = smash.get(this, 'li[value="' + value + '"]')) {
+                    smash.class.add(selected, 'selected');
+                }
                 if (select.onchange) {
                     select.onchange();
                 }
@@ -111,8 +117,8 @@ smash.input.init = function() {
 
         select.parentElement.reset = function() {
             smash.get(this, 'input').value = this.getText();
-            if (selected = smash.get(this, 'ul li.selected')) {
-                smash.class.remove(selected, 'selected');
+            if (hover = smash.get(this, 'ul li.hover')) {
+                smash.class.remove(hover, 'hover');
             }
         };
 
@@ -201,48 +207,48 @@ smash.input.init = function() {
                 e.stopPropagation();
                 switch (e.keyCode) {
                 case 13:
-                    if (selected = smash.get(select, 'ul li.selected')) {
-                        selected.onmousedown(e);
+                    if (hover = smash.get(select, 'ul li.hover')) {
+                        hover.onmousedown(e);
                     }
                     break;
                 case 37:
                 case 38:
-                    if (selected = smash.get(select, 'ul li.selected')) {
-                        smash.class.remove(selected, "selected");
-                        if (previous = smash.previousVisible(selected)) {
-                            smash.class.add(previous, "selected");
-                            previous.parentElement.scrollTop = previous.parentElement.scrollTop - previous.offsetHeight;
+                    if (hover = smash.get(select, 'ul li.hover')) {
+                        smash.class.remove(hover, "hover");
+                        if (previous = smash.previousVisible(hover)) {
+                            smash.class.add(previous, "hover");
+                            previous.parentElement.scrollTop = previous.offsetTop;
                         } else {
-                            if (last = smash.lastVisible(selected)) {
-                                smash.class.add(last, "selected");
+                            if (last = smash.lastVisible(hover)) {
+                                smash.class.add(last, "hover");
                                 last.parentElement.scrollTop = last.parentElement.scrollHeight;
                             }
                         }
                     } else {
                         var li = smash.get(select, 'ul li');
                         if (last = smash.lastVisible(li)) {
-                            smash.class.add(last, "selected");
+                            smash.class.add(last, "hover");
                             last.parentElement.scrollTop = last.parentElement.scrollHeight;
                         }
                     }
                     break;
                 case 39:
                 case 40:
-                    if (selected = smash.get(select, 'ul li.selected')) {
-                        smash.class.remove(selected, "selected");
-                        if (next = smash.nextVisible(selected)) {
-                            smash.class.add(next, "selected");
-                            next.parentElement.scrollTop = next.parentElement.scrollTop + next.offsetHeight;
+                    if (hover = smash.get(select, 'ul li.hover')) {
+                        smash.class.remove(hover, "hover");
+                        if (next = smash.nextVisible(hover)) {
+                            smash.class.add(next, "hover");
+                            next.parentElement.scrollTop = next.offsetTop;
                         } else {
-                            if (next = smash.firstVisible(selected)) {
-                                smash.class.add(next, "selected");
+                            if (next = smash.firstVisible(hover)) {
+                                smash.class.add(next, "hover");
                                 next.parentElement.scrollTop = 0;
                             }
                         }
                     } else {
                         var li = smash.get(select, 'ul li');
                         if (next = smash.firstVisible(li)) {
-                            smash.class.add(next, "selected");
+                            smash.class.add(next, "hover");
                             next.parentElement.scrollTop = 0;
                         }
                     }
