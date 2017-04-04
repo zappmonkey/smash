@@ -120,3 +120,10 @@ smash.fuzzyCompare = function(search, compare) {
     var regex = ".*?" + search.toLowerCase().replace(/-/g, "\\-").split("").join(".*?") + ".*?";
     return compare.toLowerCase().match(regex);
 };
+
+smash.findNextTabStop = function(form, el) {
+    var universe = smash.getAll(form, '.smash-input, .smash-button, .smash-select, .smash-textarea, .smash-checkbox');
+    var list = Array.prototype.filter.call(universe, function(item) {return item.tabIndex >= "0"});
+    var index = list.indexOf(el);
+    return list[index + 1] || list[0];
+};

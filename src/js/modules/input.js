@@ -34,6 +34,14 @@ smash.input.init = function() {
             return null;
         };
 
+        input.parentElement.onfocus = function(e) {
+            if (input = this.querySelector("input")) {
+                input.focus();
+            } else if (input = this.querySelector("textarea")) {
+                input.focus();
+            }
+        };
+
         if (smash.class.has(input.parentElement, 'has-floating-label')) {
             smash.class.remove(input.parentElement, 'has-floating-label');
             smash.class.add(input.parentElement, 'floating-label');
@@ -116,6 +124,11 @@ smash.input.init = function() {
             }
         };
 
+        select.parentElement.onfocus = function(e) {
+            var input = this.querySelector("input");
+            input.focus(e);
+        };
+
         select.parentElement.getValue = function() {
             var select = this.querySelector("select");
             if (select.selectedIndex == -1) {
@@ -176,10 +189,14 @@ smash.input.init = function() {
             ul.appendChild(li);
             li.onmousedown = function(e) {
                 this.parentElement.parentElement.setValue(this.getAttribute('value'));
+                var next = smash.findNextTabStop(this.parentElement.parentElement.parentElement, this.parentElement.parentElement);
+                next.focus();
                 e.stopPropagation();
+                e.preventDefault();
                 if (window.onmouseup) {
                     window.onmouseup();
                 }
+                return false;
             }
         }
         select.parentElement.appendChild(ul);
@@ -223,10 +240,11 @@ smash.input.init = function() {
                 smash.class.remove(smash_select, 'is-focussed');
                 return false;
             };
-            input.onkeyup = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            input.onkeydown = function(e) {
                 switch (e.keyCode) {
+                case 9:
+                    return true;
+                case 13:
                 case 39:
                     if (hover = smash.get(smash_select, 'ul li.hover')) {
                         hover.onmousedown(e);
@@ -278,6 +296,8 @@ smash.input.init = function() {
                     this.focus();
                     break;
                 }
+                e.preventDefault();
+                e.stopPropagation();
                 var q = this.value.replace(/[^a-zA-Z0-9_ ]/g, "");
                 if (items = smash.getAll(smash_select, 'ul li')) {
                     smash.show(smash_select, 'ul');

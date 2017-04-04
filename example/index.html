@@ -177,8 +177,9 @@
                                     <option value="2017-03-02">2017-03-02</option>
                                 </select>
                             </div>
-                            <div class="smash-select has-floating-label">
-                                <select name="adres" placeholder="Select an option">
+                            <form>
+                            <div class="smash-select has-floating-label" tabindex="1">
+                                <select name="adres2" placeholder="Select an option">
                                     <option value=""></option>
                                     <option value="1">Value 1</option>
                                     <option value="2">Value 2</option>
@@ -191,10 +192,12 @@
                                 </select>
                             </div>
                             <br/>
-                            <div class="smash-textarea has-floating-label size-2-2 smash-has-tooltip">
+                            <div class="smash-textarea has-floating-label size-2-2 smash-has-tooltip" tabindex="2">
                                 <div class="smash-tooltip top">This is a tooltip</div>
                                 <textarea name="note" placeholder="Note"></textarea>
                             </div>
+                            <input type="submit" class="smash-button" value="save"/>
+                            <form>
                             <br/>
                             <button class="smash-button colored">
                                 Colored
@@ -213,7 +216,6 @@
                             <button class="smash-button">
                                 Submit
                             </button>
-                            <input type="submit" class="smash-button" value="save"/>
                             <button class="smash-button show-dialog">
                                 Show dialog
                             </button>
