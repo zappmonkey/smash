@@ -127,3 +127,13 @@ smash.findNextTabStop = function(form, el) {
     var index = list.indexOf(el);
     return list[index + 1] || list[0];
 };
+
+smash.isEmpty = function(value) {
+    switch (value) {
+    case undefined:
+    case null:
+    case "":
+        return true;
+    }
+    return false;
+};

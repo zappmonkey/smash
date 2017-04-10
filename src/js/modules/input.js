@@ -121,8 +121,8 @@ smash.input.init = function() {
                 if (this.onchange) {
                     this.onchange();
                 }
-                this.checkLabel();
             }
+            this.checkLabel();
         };
 
         select.parentElement.onfocus = function(e) {
@@ -327,6 +327,7 @@ smash.input.init = function() {
         if (select.parentElement.getAttribute('value')) {
             select.parentElement.setValue(select.parentElement.getAttribute('value'));
         }
+        select.parentElement.checkLabel();
         smash.class.add(select.parentElement, 'smash-initialised');
     }
     smash.input.checkboxInit();
