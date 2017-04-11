@@ -3,13 +3,21 @@ table {
     font-size: $font-size;
     border-collapse: collapse;
     background: #fff;
+    border: 1px solid #aaa;
 
     tr {
-        border: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    thead tr:last-child {
+        border-bottom: 1px solid #aaa;
     }
 
     td, th {
-        padding: 9px 7px;
+        padding: 7px 7px 9px;
         &:first-child {
             padding-left: 15px;
         }
