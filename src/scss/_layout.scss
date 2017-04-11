@@ -352,7 +352,7 @@ h5, h6 {
 }
 
 .smash-input, .smash-textarea, .smash-select {
-    margin-top: 18px;
+    margin-top: 6px;
     background: #fff;
     border: 1px solid #aaa;
     display: inline-block;
@@ -360,6 +360,10 @@ h5, h6 {
     position: relative;
     height: 30px;
     width: 180px;
+
+    &.floating-label {
+        margin-top: 18px;
+    }
 
     &.size-3-1 {
         width: 118px;
