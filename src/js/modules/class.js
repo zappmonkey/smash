@@ -19,3 +19,11 @@ smash.class.has = function(el, className) {
 smash.class.toggle = function(el, className) {
     smash.class.has(el, className) ? smash.class.remove(el, className) : smash.class.add(el, className);
 };
+
+smash.class.toggleAll = function(parent, selector, className) {
+    if (el = smash.getAll(parent, selector)) {
+        for (var key in el) {
+            smash.class.toggle(el[key], className);
+        }
+    }
+};
