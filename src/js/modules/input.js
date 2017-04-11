@@ -16,10 +16,14 @@ smash.input.init = function() {
         input.parentElement.setValue = function(value) {
             if (input = this.querySelector("input")) {
                 input.value = value;
-                input.onkeyup();
+                if (input.onkeyup) {
+                    input.onkeyup();
+                }
             } else if (input = this.querySelector("textarea")) {
                 input.value = value;
-                input.onkeyup();
+                if (input.onkeyup) {
+                    input.onkeyup();
+                }
             }
         };
 
@@ -214,7 +218,7 @@ smash.input.init = function() {
             if (window.onmouseup) {
                 window.onmouseup();
             }
-        }
+        };
 
         select.parentElement.onclick = function() {
             smash.class.add(this, 'is-focussed');
