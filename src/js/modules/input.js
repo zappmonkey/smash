@@ -247,7 +247,7 @@ smash.input.init = function() {
                 smash.class.remove(smash_select, 'is-focussed');
                 return false;
             };
-            input.onkeydown = function(e) {
+            input.onkeyup = function(e) {
                 switch (e.keyCode) {
                 case 9:
                     return true;
@@ -256,7 +256,7 @@ smash.input.init = function() {
                     if (hover = smash.get(smash_select, 'ul li.hover')) {
                         hover.onmousedown(e);
                     }
-                    break;
+                    return false;
                 case 38:
                     if (hover = smash.get(smash_select, 'ul li.hover')) {
                         smash.class.remove(hover, "hover");
@@ -276,7 +276,7 @@ smash.input.init = function() {
                             last.parentElement.scrollTop = last.parentElement.scrollHeight;
                         }
                     }
-                    break;
+                    return false;
                 case 40:
                     if (hover = smash.get(smash_select, 'ul li.hover')) {
                         smash.class.remove(hover, "hover");
@@ -296,15 +296,15 @@ smash.input.init = function() {
                             next.parentElement.scrollTop = 0;
                         }
                     }
-                    break;
+                    return false;
                 case 27:
                     this.value = "";
                     this.blur();
                     this.focus();
                     break;
                 }
-                e.preventDefault();
-                e.stopPropagation();
+                // e.preventDefault();
+                // e.stopPropagation();
                 var q = this.value.replace(/[^a-zA-Z0-9_ ]/g, "");
                 if (items = smash.getAll(smash_select, 'ul li')) {
                     smash.show(smash_select, 'ul');
@@ -323,7 +323,7 @@ smash.input.init = function() {
                         smash.hide(smash_select, 'ul');
                     }
                 }
-                return false;
+                return true;
             };
             input.focus();
         };
