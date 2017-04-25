@@ -96,9 +96,9 @@ smash.input.init = function() {
             var input = this.querySelector("input");
             var old = select.value;
             select.value = value;
-            if (select.selectedIndex > -1) {
+            if (select.value != "" && select.selectedIndex > -1) {
                 var text = select.options[select.selectedIndex].text;
-                if (text && text != "") {
+                if (text && text != "" && text != '&nbsp;') {
                     input.value = text;
                 } else {
                     input.value = "";
