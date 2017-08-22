@@ -18,6 +18,5 @@
         "gulp-cssnano": "",
         "gulp-cleanhtml": ""
     },
-    "dependencies": {
-    }
+    "dependencies": {}
 }
