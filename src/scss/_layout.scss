@@ -120,6 +120,7 @@ h5, h6 {
                     display: none;
                     li {
                         padding: 0 20px;
+                        white-space: nowrap;
                         &:hover {
                             background: $light-hover-color;
                         }
@@ -451,6 +452,12 @@ h5, h6 {
         z-index: 2;
         max-height: 200px;
         overflow-y: scroll;
+
+        &.top {
+            top: inherit;
+            bottom: 30px;
+            box-shadow: none;
+        }
 
         li {
             font-family: $font;
