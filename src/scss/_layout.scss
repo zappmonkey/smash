@@ -479,6 +479,12 @@ h5, h6 {
         }
     }
 
+    &.top ul {
+        top: inherit;
+        bottom: 30px;
+        box-shadow: none;
+    }
+
     &.is-focussed {
         ul {
             display: block;
