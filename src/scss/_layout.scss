@@ -352,7 +352,7 @@ h5, h6 {
     }
 }
 
-.smash-input, .smash-textarea, .smash-select {
+.smash-input, .smash-textarea, .smash-select, .smash-select-multiple {
     margin-top: 6px;
     background: #fff;
     border: 1px solid #aaa;
@@ -382,7 +382,7 @@ h5, h6 {
         width: 366px;
     }
 
-    input, textarea {
+    input[type=text], textarea {
         font-family: $font;
         font-size: $font-size;
         font-weight: normal;
@@ -394,6 +394,10 @@ h5, h6 {
         width: 100%;
         max-width: 100%;
         min-width: 100%;
+    }
+
+    input[type=checkbox] {
+        margin-right: 7px;
     }
 
     select {
@@ -426,7 +430,7 @@ h5, h6 {
     height: auto;
 }
 
-.smash-select {
+.smash-select, .smash-select-multiple {
     &:after {
         font-family: "Material Icons";
         font-size: 16px;
@@ -489,6 +493,12 @@ h5, h6 {
         ul {
             display: block;
         }
+    }
+
+    input[type=text] {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 26px;
     }
 }
 

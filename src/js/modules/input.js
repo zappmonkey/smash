@@ -71,13 +71,14 @@ smash.input.init = function() {
 
         smash.class.add(input.parentElement, 'smash-initialised');
     }
-    var selects = document.querySelectorAll(".smash-select select");
+    var selects = document.querySelectorAll(".smash-select select, .smash-select-multiple select");
     var select;
     for (var i = 0; i < selects.length; i++) {
         select = selects[i];
         if (smash.class.has(select.parentElement, 'smash-initialised')) {
             continue;
         }
+        select.parentElement.multiple = smash.class.has(select.parentElement, 'smash-select-multiple');
         if (smash.class.has(select.parentElement, 'has-floating-label')) {
             smash.class.remove(select.parentElement, 'has-floating-label');
             smash.class.add(select.parentElement, 'floating-label');
@@ -94,29 +95,50 @@ smash.input.init = function() {
             smash.class.remove(this, 'is-focussed');
             var select = this.querySelector("select");
             var input = this.querySelector("input");
-            var old = select.value;
-            select.value = value;
-            if (select.value != "" && select.selectedIndex > -1) {
-                var text = select.options[select.selectedIndex].text;
-                if (text && text != "" && text != '&nbsp;') {
-                    input.value = text;
+            var multivalue;
+            if (this.multiple && !smash.isEmpty(value)) {
+                multivalue = JSON.stringify(value);
+            }
+            var old = this.value;
+            this.value = this.multiple ? multivalue : value;
+            if (!this.multiple) {
+                select.value = value;
+            }
+            if (this.value != "" && ((!this.multiple && select.selectedIndex > -1) || this.multiple)) {
+                if (!this.multiple) {
+                    var text = select.options[select.selectedIndex].text;
+                    if (text && text != "" && text != '&nbsp;') {
+                        input.value = text;
+                    } else {
+                        input.value = "";
+                        input.placeholder = select.getAttribute('placeholder');
+                    }
                 } else {
-                    input.value = "";
+                    var labels = []
+                    this.querySelectorAll("li.selected").forEach(function(el) {
+                        labels.push(el.textContent);
+                    });
+                    input.value = labels.join(" + ");
                     input.placeholder = select.getAttribute('placeholder');
                 }
             } else {
                 input.value = "";
                 input.placeholder = select.getAttribute('placeholder');
             }
+            if (this.multiple) {
+                value = multivalue;
+            }
             input.focus();
             input.blur();
             if (old != value) {
-                if (selected = smash.get(this.parentElement, '.selected')) {
-                    smash.class.remove(selected, 'selected');
-                }
-                if (value != '') {
-                    if (selected = smash.get(this, 'li[value="' + value + '"]')) {
-                        smash.class.add(selected, 'selected');
+                if (!this.multiple) {
+                    if (selected = smash.get(this.parentElement, '.selected')) {
+                        smash.class.remove(selected, 'selected');
+                    }
+                    if (value != '') {
+                        if (selected = smash.get(this, 'li[value="' + value + '"]')) {
+                            smash.class.add(selected, 'selected');
+                        }
                     }
                 }
                 if (select.onchange) {
@@ -135,11 +157,17 @@ smash.input.init = function() {
         };
 
         select.parentElement.getValue = function() {
-            var select = this.querySelector("select");
-            if (select.selectedIndex == -1) {
-                return null;
+            if (!this.multiple) {
+                var select = this.querySelector("select");
+                if (select.selectedIndex == -1) {
+                    return null;
+                }
+                return select.options[select.selectedIndex].value;
             }
-            return select.options[select.selectedIndex].value;
+            if (!smash.isEmpty(this.value)) {
+                return JSON.parse(this.value);
+            }
+            return undefined;
         };
 
         select.parentElement.reset = function() {
@@ -163,11 +191,18 @@ smash.input.init = function() {
         };
 
         select.parentElement.getText = function() {
-            var select = this.querySelector("select");
-            if (select.selectedIndex == -1) {
-                return null;
+            if (!this.multiple) {
+                var select = this.querySelector("select");
+                if (select.selectedIndex == -1) {
+                    return null;
+                }
+                return select.options[select.selectedIndex].innerHTML;
             }
-            return select.options[select.selectedIndex].innerHTML;
+            var labels = []
+            this.querySelectorAll("li.selected").forEach(function(el) {
+                labels.push(el.textContent);
+            });
+            return labels.join(" + ");
         };
 
         var input = document.createElement('input');
@@ -191,9 +226,33 @@ smash.input.init = function() {
             var li = document.createElement('li');
             li.setAttribute("value", option.value);
             li.innerHTML = option.innerHTML == "" ? '&nbsp;' : option.innerHTML;
+            if (select.parentElement.multiple) {
+                li.innerHTML = option.innerHTML == "" ? '&nbsp;' : '<input type="checkbox">' + option.innerHTML;
+            } else {
+                li.innerHTML = option.innerHTML == "" ? '&nbsp;' : option.innerHTML;
+            }
             ul.appendChild(li);
             li.onmousedown = function(e) {
-                this.parentElement.parentElement.setValue(this.getAttribute('value'));
+                if (this.parentElement.parentElement.multiple) {
+                    if (checkbox = this.querySelector("input")) {
+                        if (!smash.isEmpty(checkbox.getAttribute('checked'))) {
+                            smash.class.remove(checkbox.parentElement, "selected");
+                            checkbox.removeAttribute('checked');
+                        } else {
+                            smash.class.add(checkbox.parentElement, "selected");
+                            checkbox.setAttribute('checked', 'checked');
+                        }
+                    }
+                    var values = [];
+                    if (selected = this.parentElement.querySelectorAll(".selected")) {
+                        selected.forEach(function(el) {
+                            values.push(el.value);
+                        });
+                    }
+                    this.parentElement.parentElement.setValue(values);
+                } else {
+                    this.parentElement.parentElement.setValue(this.getAttribute('value'));
+                }
                 if (next = smash.findNextTabStop(this.parentElement.parentElement.parentElement, this.parentElement.parentElement)) {
                     next.focus();
                 }
@@ -329,7 +388,19 @@ smash.input.init = function() {
         };
 
         if (select.parentElement.getAttribute('value')) {
-            select.parentElement.setValue(select.parentElement.getAttribute('value'));
+            var val = select.parentElement.getAttribute('value');
+            if (select.parentElement.multiple) {
+                val = JSON.parse(val);
+                for (var key in val) {
+                    if (selected = select.parentElement.querySelector("li[value='" + val[key] + "']")) {
+                        smash.class.add(selected, "selected");
+                    }
+                    if (input = select.parentElement.querySelector("li[value='" + val[key] + "'] input")) {
+                        input.setAttribute("checked", "checked");
+                    }
+                }
+            }
+            select.parentElement.setValue(val);
         }
         select.parentElement.checkLabel();
         smash.class.add(select.parentElement, 'smash-initialised');

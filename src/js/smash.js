@@ -2,6 +2,8 @@ window.addEventListener("load", function(e){
     smash.init();
 }, false);
 
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 var smash = {};
 
 smash.init = function() {
@@ -122,7 +124,7 @@ smash.fuzzyCompare = function(search, compare) {
 };
 
 smash.findNextTabStop = function(form, el) {
-    var universe = smash.getAll(form, '.smash-input, .smash-button, .smash-select, .smash-textarea, .smash-checkbox');
+    var universe = smash.getAll(form, '.smash-input, .smash-button, .smash-select, .smash-select-multiple, .smash-textarea, .smash-checkbox');
     var list = Array.prototype.filter.call(universe, function(item) {return item.tabIndex >= "0"});
     var index = list.indexOf(el);
     return list[index + 1] || list[0];
